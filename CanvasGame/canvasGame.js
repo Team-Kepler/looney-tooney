@@ -27,7 +27,7 @@ duckImage.src = "images/DuckNew.png";
 var duck = {
     x:0,
     y:0,
-    speed: 230,
+    speed: 150,//230,
     width:48,
     height:95,
     frames : 4,
