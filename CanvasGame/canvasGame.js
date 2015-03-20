@@ -2,7 +2,7 @@
 // Create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
-canvas.width = 1000;
+canvas.width = 2000;
 canvas.height = 600;
 document.body.appendChild(canvas);
 
@@ -88,7 +88,7 @@ var update = function (deltaTime) {
 // Draw the game
 var render = function () {
     if (isBgReady) {
-        ctx.drawImage(bgImage, 0, 0, 1000, 600);
+        ctx.drawImage(bgImage, 0, 0, 2000, 600);
     }
 
     if (isDuckReady) {
