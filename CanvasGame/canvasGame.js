@@ -16,20 +16,20 @@ bgImage.onload = function () {
 bgImage.src = "images/background-two.png";
 
 // Duck image
-var isDuckReady = false;
-var duckImage = new Image();
-duckImage.onload = function () {
-    isDuckReady = true;
+var isPlayerReady = false;
+var playerImage = new Image();
+playerImage.onload = function () {
+    isPlayerReady = true;
 };
-duckImage.src = "images/DuckNew.png";
+playerImage.src = "images/player-sprite-sheet.png";
 
 // Game objects
-var duck = {
+var player = {
     x:0,
     y:0,
     speed: 150,//230,
-    width:48,
-    height:95,
+    width:45,
+    height:90,
     frames : 4,
     currentFrame : 0
 };
@@ -37,6 +37,7 @@ var duck = {
 
 // Keyboard controls
 var keysDown = [];
+var keysPressed=[];
 
 addEventListener("keydown", function (e) {
     keysDown[e.keyCode] = true;
@@ -46,16 +47,31 @@ addEventListener("keyup", function (e) {
     delete keysDown[e.keyCode];
 }, false);
 
+addEventListener("keypress", function (e) {
+    keysPressed[e.keyCode] = true;
+}, false);
+
+var changePlayer=function() {
+    //key 1 is down
+    if(49 in keysPressed){
+        return 1;
+    }
+    //key 2 is down
+    else if (50 in keysPressed) {
+        return 2;
+    }
+};
+
 // Reset the game
 var reset = function () {
-    duck.x = 0;
-    duck.y = 470;
+    player.x = 0;
+    player.y = 470;
 };
 
 //Player is moving left
 var movingLeft=function() {
     if ((37 in keysDown) ||(65 in keysDown)) {
-        if(duck.x>0) {
+        if(player.x>0) {
             return true;
         }
     }
@@ -65,23 +81,50 @@ var movingLeft=function() {
 //Player is moving right
 var movingRight=function() {
     if ((39 in keysDown)|| (68 in keysDown)) {
-        if(duck.x<700) {
+        if(player.x<700) {
             return true;
         }
     }
     return false;
 };
 
+var daffyDuck=function() {
+    if(movingRight()===true) {
+        ctx.drawImage(playerImage, player.width * player.currentFrame, 90, player.width, player.height, player.x, player.y, player.width, player.height);
+    } else if(movingLeft()===true) {
+        player.width=43;
+        ctx.drawImage(playerImage, player.width * player.currentFrame, 180, player.width, player.height, player.x, player.y, player.width, player.height);
+    } else{
+        ctx.drawImage(playerImage, 0, 0, player.width, player.height, player.x, player.y, player.width, player.height);
+    }
+};
+
+var taz=function() {
+    playerImage.src="images/taz.png";
+    if(movingRight()===true) {
+        player.width=62;
+        player.height=60;
+        ctx.drawImage(playerImage, player.width * player.currentFrame, 70, player.width, player.height, player.x, player.y, player.width,70);
+    } else if(movingLeft()===true) {
+        player.width=62;
+        player.height=60;
+        ctx.drawImage(playerImage, player.width * player.currentFrame, 138, player.width, player.height, player.x, player.y, player.width, 70);
+    } else{
+        player.width=80;
+        player.height=80;
+        ctx.drawImage(playerImage, 0, 0, player.width, player.height, player.x, player.y, player.width, player.height);
+    }
+};
 
 // Update objects of the game
 var update = function (deltaTime) {
 
     if(movingLeft()===true){
-        duck.x -= duck.speed * deltaTime;
+        player.x -= player.speed * deltaTime;
     }
 
     if(movingRight()===true) {
-        duck.x += duck.speed * deltaTime;
+        player.x += player.speed * deltaTime;
     }
 };
 
@@ -91,17 +134,17 @@ var render = function () {
         ctx.drawImage(bgImage, 0, 0, 1000, 600);
     }
 
-    if (isDuckReady) {
+    if (isPlayerReady) {
         //Change frames in time
-        duck.currentFrame = 0 |(((new Date()).getTime()) * (duck.frames/800.0)) % duck.frames;
-        //console.log(duck.currentFrame);
-        if(movingRight()===true) {
-            ctx.drawImage(duckImage, duck.width * duck.currentFrame, 0, duck.width, duck.height, duck.x, duck.y, duck.width, duck.height);
-        } else if(movingLeft()===true) {
-            duck.width=50;
-            ctx.drawImage(duckImage, duck.width * duck.currentFrame, 95, duck.width, duck.height, duck.x, duck.y, duck.width, duck.height);
-        } else{
-            ctx.drawImage(duckImage, 0, 0, duck.width, duck.height, duck.x, duck.y, duck.width, duck.height);
+        player.currentFrame = 0 |(((new Date()).getTime()) * (player.frames/800.0)) % player.frames;
+        //console.log(player.currentFrame);
+        //TODO:
+        //Repair sprite motion of taz
+        daffyDuck();
+        if(changePlayer()===1) {
+            daffyDuck();
+        } else if(changePlayer()===2){
+            taz();
         }
     }
 };
