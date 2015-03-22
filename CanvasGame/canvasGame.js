@@ -49,7 +49,7 @@ addEventListener("keyup", function (e) {
     delete keysDown[e.keyCode];
 }, false);
 
-addEventListener("keypress", function (e) {
+addEventListener("keydown", function (e) {
     keysPressed[e.keyCode] = true;
 }, false);
 
