@@ -133,8 +133,10 @@ var taz=function() {
     }
     //Idle
     else{
-        player.width=70;
-        player.height=70;
+        player.width=80;
+        player.height=85;
+        player.boxWidth=player.width;
+        player.boxHeight=player.height;
         ctx.drawImage(playerImage, 0, 0, player.width, player.height, player.x, player.y, player.boxWidth, player.boxHeight);
     }
 };
@@ -188,12 +190,14 @@ var render = function () {
         //console.log(player.currentFrame);
 
         //Choose player
-        if(changePlayer()===1) {
-            daffyDuck();
-        } else if(changePlayer()===2){
-            taz();
-        }else if(changePlayer()===3){
+        if(changePlayer()===3) {
+            daffyDuck()
+        }
+       else if(changePlayer()===2){
             bugsBunny();
+        }
+       else if(changePlayer()===1){
+            taz();
         }
     }
 };
