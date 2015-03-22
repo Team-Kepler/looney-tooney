@@ -31,7 +31,9 @@ var player = {
     width:45,
     height:90,
     frames : 4,
-    currentFrame : 0
+    currentFrame : 0,
+    boxWidth:50,
+    boxHeight:90
 };
 
 
@@ -59,6 +61,11 @@ var changePlayer=function() {
     //key 2 is down
     else if (50 in keysPressed) {
         return 2;
+    }
+
+    //key 3 is down
+    else if (51 in keysPressed) {
+        return 3;
     }
 };
 
@@ -90,29 +97,70 @@ var movingRight=function() {
 
 var daffyDuck=function() {
     if(movingRight()===true) {
-        ctx.drawImage(playerImage, player.width * player.currentFrame, 90, player.width, player.height, player.x, player.y, player.width, player.height);
+        player.width=43;
+        ctx.drawImage(playerImage, player.width * player.currentFrame, 90, player.width, player.height, player.x, player.y, player.boxWidth, player.boxHeight);
     } else if(movingLeft()===true) {
         player.width=43;
-        ctx.drawImage(playerImage, player.width * player.currentFrame, 180, player.width, player.height, player.x, player.y, player.width, player.height);
-    } else{
-        ctx.drawImage(playerImage, 0, 0, player.width, player.height, player.x, player.y, player.width, player.height);
+        ctx.drawImage(playerImage, player.width * player.currentFrame, 180, player.width, player.height, player.x, player.y, player.boxWidth, player.boxHeight);
+    }
+    //Shooting with Control
+    else if(17 in keysDown) {
+        player.width=90;
+        player.boxWidth=player.width;
+        ctx.drawImage(playerImage, 50, 0, player.width, player.height, player.x, player.y, player.boxWidth,  player.boxHeight);
+    }
+    //Idle
+    else{
+        player.width=45;
+        player.boxWidth=45;
+        ctx.drawImage(playerImage, 0, 0, player.width, player.height, player.x, player.y, player.boxWidth,  player.boxHeight);
     }
 };
 
 var taz=function() {
     playerImage.src="images/taz.png";
+    player.y=490;
+    player.boxHeight=70;
+    player.boxHeight=70;
     if(movingRight()===true) {
         player.width=62;
         player.height=60;
-        ctx.drawImage(playerImage, player.width * player.currentFrame, 70, player.width, player.height, player.x, player.y, player.width,70);
+        ctx.drawImage(playerImage, player.width * player.currentFrame, 70, player.width, player.height, player.x, player.y, player.boxWidth, player.boxHeight);
     } else if(movingLeft()===true) {
         player.width=62;
         player.height=60;
-        ctx.drawImage(playerImage, player.width * player.currentFrame, 138, player.width, player.height, player.x, player.y, player.width, 70);
-    } else{
+        ctx.drawImage(playerImage, player.width * player.currentFrame, 138, player.width, player.height, player.x, player.y, player.boxWidth,  player.boxHeight);
+    }
+    //Idle
+    else{
+        player.width=70;
+        player.height=70;
+        ctx.drawImage(playerImage, 0, 0, player.width, player.height, player.x, player.y, player.boxWidth, player.boxHeight);
+    }
+};
+
+var bugsBunny=function() {
+    playerImage.src="images/Bunny.png";
+    if(movingRight()===true) {
+        player.width=58;
+        player.height=95;
+        player.boxWidth=player.width;
+        player.boxHeight=player.height;
+        ctx.drawImage(playerImage, player.width * player.currentFrame, 95, player.width, player.height, player.x, player.y, player.boxWidth,player.boxHeight);
+    } else if(movingLeft()===true) {
+        player.width=58;
+        player.height=95;
+        player.boxWidth=player.width;
+        player.boxHeight=player.height;
+        ctx.drawImage(playerImage, player.width * player.currentFrame, 190, player.width, player.height, player.x, player.y, player.boxWidth, player.boxHeight);
+    }
+    //Idle
+    else{
         player.width=80;
-        player.height=80;
-        ctx.drawImage(playerImage, 0, 0, player.width, player.height, player.x, player.y, player.width, player.height);
+        player.height=85;
+        player.boxWidth=player.width;
+        player.boxHeight=player.height;
+        ctx.drawImage(playerImage, 0, 0, player.width, player.height, player.x, player.y, player.boxWidth, player.boxHeight);
     }
 };
 
@@ -138,13 +186,14 @@ var render = function () {
         //Change frames in time
         player.currentFrame = 0 |(((new Date()).getTime()) * (player.frames/800.0)) % player.frames;
         //console.log(player.currentFrame);
-        //TODO:
-        //Repair sprite motion of taz
-        daffyDuck();
+
+        //Choose player
         if(changePlayer()===1) {
             daffyDuck();
         } else if(changePlayer()===2){
             taz();
+        }else if(changePlayer()===3){
+            bugsBunny();
         }
     }
 };
