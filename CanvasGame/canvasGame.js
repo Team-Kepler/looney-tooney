@@ -186,12 +186,12 @@ var render = function () {
 
     if (isPlayerReady) {
         //Change frames in time
-        player.currentFrame = 0 |(((new Date()).getTime()) * (player.frames/800.0)) % player.frames;
+        player.currentFrame = Math.floor(((new Date()).getTime()) * (player.frames/800.0)) % player.frames;
         //console.log(player.currentFrame);
 
         //Choose player
         if(changePlayer()===3) {
-            daffyDuck()
+            daffyDuck();
         }
        else if(changePlayer()===2){
             bugsBunny();
