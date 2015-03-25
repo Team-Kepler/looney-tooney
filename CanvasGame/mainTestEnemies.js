@@ -1,11 +1,11 @@
-var canvas = document.getElementById('canvas');
+var canvas = getDocumentElementById('canvas');
 var ctx = canvas.getContext('2d');
 
 var keys = new Input();
 attachListeners(keys);
 
-
-var yosemity = new Player(20, 390);
+//Create enemy Yosemity
+var yosemity = new Player(50, 390);
 
 
 function update() {

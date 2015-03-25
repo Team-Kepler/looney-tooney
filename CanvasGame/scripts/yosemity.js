@@ -31,12 +31,12 @@ var Player = (function() {
     }
 
     Player.prototype.update = function() {
-       // if((this.movement.right) && (this.position.x <= 500)) {
+        if((this.movement.right) && (this.position.x <= 500)) {
             this.position.x += this.velocity;
-        //}
-       // else if(this.movement.left) {
+        }
+        else if(this.movement.left) {
             this.position.x -= this.velocity;
-        //};
+        };
 
         if(this.movement.up) {
             this.position.y -= this.velocity;

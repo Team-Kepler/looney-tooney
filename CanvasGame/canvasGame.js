@@ -15,6 +15,9 @@ bgImage.onload = function () {
 };
 bgImage.src = "images/background-two.png";
 
+////Create enemy Yosemity
+//var yosemity = new Player(820, 390);
+
 // Duck image
 var isPlayerReady = false;
 var playerImage = new Image();
@@ -200,6 +203,8 @@ var render = function () {
             taz();
         }
     }
+
+
 };
 
 // The main game loop
@@ -208,7 +213,7 @@ var main = function () {
     var delta = (now - lastTime) / 1000.0;
 
     update(delta);
-    render();
+    render(ctx);
 
     lastTime = now;
 
