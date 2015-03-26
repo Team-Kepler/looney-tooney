@@ -19,7 +19,7 @@ var Player = (function() {
                 0,
                 0,
                 4,
-                'images/bunny.png',
+                'images/BugsBunny.png',
                 4,
                 0,
                 4
@@ -41,7 +41,7 @@ var Player = (function() {
                 0,
                 0,
                 4,
-                'images/taz.png',
+                'images/TazmanianDevil.png',
                 4,
                 0,
                 4
