@@ -8,12 +8,12 @@ var bckgImg = new Image();
 bckgImg.src = 'images/background-two.png';
 
 var player = new Player(100, 460);
-
+var yosemity = new Yosemity(200,300);
 
 
 function update() {
     tick();
-    render();
+    render(ctx);
     requestAnimationFrame(update);
 }
 
@@ -43,13 +43,17 @@ function tick() {
     }
 
     player.update();
+    yosemity.update();
 }
 
-function render() {
+function render(ctx) {
+
+    console.log('j0ohn')
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(bckgImg, 0, 0, canvas.width, canvas.height);
 
     player.render(ctx);
+    yosemity.render(ctx);
 }
 
 update();
