@@ -99,8 +99,8 @@ var Player = (function() {
             this.animation.setLimit(4);
             this.animation.setRow(3);
         } else {
-            this.animation.setLimit(1);
-            this.animation.setColumn(0);
+            this.animation.setLimit(4);
+            //this.animation.setColumn(0);
             this.animation.setRow(0);
         }
 
