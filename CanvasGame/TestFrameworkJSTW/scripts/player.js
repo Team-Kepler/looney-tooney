@@ -9,9 +9,9 @@ var Player = (function() {
             jump: false,
             idle: true
         };
-        this.velocity = 2;
-        this.width = 58.6;
-        this.height = 105;
+        this.velocity = 4;
+        this.width = 85;
+        this.height = 85;
         this.animationLib = {
             bunny: new Animation(
                 this.width,
@@ -20,17 +20,28 @@ var Player = (function() {
                 0,
                 4,
                 'images/bunny.png',
-                5,
+                4,
                 0,
                 4
             ),
             duck: new Animation(
-                this.width=43,
-                this.height=90,
+                this.width,
+                this.height,
                 0,
                 0,
                 4,
                 'images/player-sprite-sheet.png',
+                4,
+                0,
+                4
+            ),
+            taz: new Animation(
+                this.width,
+                this.height,
+                0,
+                0,
+                4,
+                'images/taz.png',
                 4,
                 0,
                 4
@@ -51,6 +62,8 @@ var Player = (function() {
             this.animation = this.animationLib.duck;
         } else if(input.o) {
             this.animation = this.animationLib.bunny;
+        } else if (input.p) {
+            this.animation = this.animationLib.taz;
         }
 
         if(this.movement.right) {
