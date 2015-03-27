@@ -87,6 +87,8 @@ function tick() {
     }
 
 
+
+
     player.update();
     yosemity.update();
     fallingBonus.update();
