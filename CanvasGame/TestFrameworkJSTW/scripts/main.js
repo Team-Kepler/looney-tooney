@@ -7,7 +7,10 @@ var input = new Input();
 attachListeners(input);
 
 var bckgImg = new Image();
-bckgImg.src = 'images/background.jpg'
+bckgImg.src = 'images/backgroundWide.png';
+
+var bckgClouds = new Image();
+bckgClouds.src = 'images/clouds3.jpg';
 
 function Background() {
     this.x = 0,
@@ -101,7 +104,7 @@ function render(ctx) {
 
     //console.log('j0ohn')
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //  ctx.drawImage(bckgImg, 0, 0, canvas.width, canvas.height);
+   ctx.drawImage(bckgClouds, 0, 0, canvas.width, canvas.height);
     /*background.render(ctx);*/
 
 
