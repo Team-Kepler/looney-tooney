@@ -69,7 +69,7 @@ var Player = (function() {
     }
 
     Player.prototype.update = function() {
-        if(input.) {
+        if(input.i) {
         	this.character = 'daffy';
             this.animation = this.animationLib.duck;
         } else if(input.o) {
