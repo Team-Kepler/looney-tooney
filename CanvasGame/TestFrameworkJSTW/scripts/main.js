@@ -7,7 +7,23 @@ var input = new Input();
 attachListeners(input);
 
 var bckgImg = new Image();
-bckgImg.src = 'images/background.png';
+bckgImg.src = 'images/background.png'
+
+function Background() {
+    this.x = 0,
+        this.y = 0,
+        this.width = bckgImg.width,
+        this.height = bckgImg.height;
+    this.render = function() {
+        ctx.drawImage(bckgImg, this.x += -1, 0, canvas.width, canvas.height);
+        if(this.x <= -580) {
+            this.x = 0;
+        }
+    }
+}
+
+var background = new Background();
+
 
 
 spike1 = new Spike(280, 480);
@@ -78,13 +94,14 @@ function render(ctx) {
 
     //console.log('j0ohn')
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(bckgImg, 0, 0, canvas.width, canvas.height);
+  //  ctx.drawImage(bckgImg, 0, 0, canvas.width, canvas.height);
     ctx.font="25px Arial";
     ctx.fillStyle="white";
     ctx.fillText("Scores: "+scores,100,50);
     ctx.fillText("Timer: "+timer,340,50);
     ctx.fillText("Lives: "+lives,550,50);
 
+    background.render(ctx);
     player.render(ctx);
     yosemity.render(ctx);
     fallingBonus.render(ctx);
