@@ -16,7 +16,14 @@ spike2 = new Spike(480, 480);
 
 var player = new Player(100, 475);
 var yosemity = new Yosemity(900,499);
+var fallingBonus=new FallingBonus(50,50);
+var scores =0;
+var lives=0;
+var timer=0;
 
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function update() {
     tick();
@@ -25,6 +32,11 @@ function update() {
 }
 
 function tick() {
+    if((fallingBonus.position.y>=580) || player.boundingBox.intersects(fallingBonus.boundingBox)){
+
+            fallingBonus=new FallingBonus(getRandomInt(20,1000),50);
+    }
+
     if (!player.movement.down) {
         player.movement.right = false;
         player.movement.left = false;
@@ -59,6 +71,7 @@ function tick() {
 
     player.update();
     yosemity.update();
+    fallingBonus.update();
 }
 
 function render(ctx) {
@@ -66,9 +79,15 @@ function render(ctx) {
     //console.log('j0ohn')
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(bckgImg, 0, 0, canvas.width, canvas.height);
+    ctx.font="25px Arial";
+    ctx.fillStyle="white";
+    ctx.fillText("Scores: "+scores,100,50);
+    ctx.fillText("Timer: "+timer,340,50);
+    ctx.fillText("Lives: "+lives,550,50);
 
     player.render(ctx);
     yosemity.render(ctx);
+    fallingBonus.render(ctx);
 
 
     spike1.render(ctx);
