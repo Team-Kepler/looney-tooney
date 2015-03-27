@@ -6,18 +6,19 @@ var Player = (function() {
             right: false,
             down: false,
             jump: false,
+            spin: false,
             idle: true
         };
 
+        this.character = 'bugs';
+
         this.canJump = true;
-        this.jumpDuration = 12;
+        this.jumpDuration = 11;
         this.jumpValue = 0;
 
-        this.canSpin = true;
-        this.spinDuration = 10;
-        this.spinValue = 0;
+        this.velocityX = 4;
+        this.velocityY = 8;
 
-        this.velocity = 4;
         this.width = 85;
         this.height = 85;
         this.animationLib = {
@@ -28,8 +29,8 @@ var Player = (function() {
                 0,
                 4,
                 'images/BugsBunny.png',
+                6, // 5 for better jump
                 4,
-                0,
                 4
             ),
             duck: new Animation(
@@ -58,19 +59,21 @@ var Player = (function() {
         this.animation = this.animationLib.bunny;
 
         this.boundingBox = new Rectangle (
-            x,
-            y,
-            this.width,
-            this.height
+            x + this.width / 2,
+            y + this.height / 2,
+            this.width / 4,
+            this.height / 2
         );
+
+        this.alerts = 0;
     }
 
     Player.prototype.update = function() {
         if(input.i) {
-        	this.character = 'bugs';
+        	this.character = 'daffy';
             this.animation = this.animationLib.duck;
         } else if(input.o) {
-        	this.character = 'daffy';
+        	this.character = 'bugs';
             this.animation = this.animationLib.bunny;
         } else if (input.p) {
         	this.character = 'taz';
@@ -78,16 +81,20 @@ var Player = (function() {
         }
 
         if(this.movement.right) {
-            this.position.x += this.velocity;
+            if(!player.intersectsRight(spike1)) {
+            	this.position.x += this.velocityX;
+            }
         }
         else if(this.movement.left) {
-            this.position.x -= this.velocity;
+            if(!player.intersectsLeft(spike1)) {
+            	this.position.x -= this.velocityX;
+            }
         }
 
         if((this.movement.jump || this.jumpValue > 0) && this.canJump) {  
         	player.movement.down = false;
         	if (this.jumpValue <= this.jumpDuration) {	
-	            this.position.y -= this.velocity * 2;
+	            this.position.y -= this.velocityY;
 	            this.jumpValue++;
 	        } else {
 	        	this.canJump = false;
@@ -96,19 +103,26 @@ var Player = (function() {
 	        }
         }
         else if(this.movement.down) {
+        	this.movement.jump = false;
         	if(this.position.y <= ground) {
-            	this.position.y += this.velocity;
+            	this.position.y += this.velocityY / 2;
         	} else { 
         		this.movement.down = false;
-        		//setTimeout(function() { this.canJump = true; console.log(this.canJump); }, 1000);
         		this.canJump = true;
         		this.jumpValue = 0;
         	}
+
+        	if (player.intersects(spike1) && this.alerts === 0) {
+        		alert('dead');
+        		this.alerts++;
+        	}
         }
 
+
         this.animation.position.set(this.position.x, this.position.y);
-        this.boundingBox.x = this.position.x;
-        this.boundingBox.y = this.position.y;
+        this.boundingBox.x = this.position.x + (this.width / 2.5);
+        this.boundingBox.y = this.position.y + (this.height / 4);
+
         if(this.movement.jump) {
         	//this.animation.updateJump();
         	this.animation.update();
@@ -119,7 +133,11 @@ var Player = (function() {
 
 
     Player.prototype.render = function(ctx) {
-        if(this.movement.jump && this.canJump){
+    	if (this.movement.spin) {
+    		this.animation.setLimit(4);
+    		this.animation.setRow(3)
+    	
+    	} else if(this.movement.jump && this.canJump) {
 		 	if (this.movement.left) {
             	this.animation.setLimit(4);
             	this.animation.setRow(4);
@@ -127,16 +145,7 @@ var Player = (function() {
             	this.animation.setLimit(4);
             	this.animation.setRow(3);
             }
-        } else if(this.movement.down) {
-        	if (this.movement.left) {
-            	//this.animation.setLimit(2);
-            	//this.animation.setRow(4);
-            	//this.animation.setColumn(3);
-            } else {
-            	//this.animation.setLimit(2);
-            	//this.animation.setRow(3);
-            }
-    	} else if(this.movement.right) {
+        } else if(this.movement.right) {
             this.animation.setLimit(4);
             this.animation.setRow(1);
 
@@ -151,6 +160,32 @@ var Player = (function() {
 
         this.animation.draw(ctx);
     };
+
+    Player.prototype.intersects = function (object) {
+		return object.boundingBox.intersects(this.boundingBox) || this.boundingBox.intersects(object.boundingBox);
+	};
+
+	Player.prototype.intersectsRight = function (object) {
+    	var playerFutureBox = new Rectangle(
+    		this.boundingBox.x + this.velocityX + 1,
+    		this.boundingBox.y,
+    		this.boundingBox.width,
+    		this.boundingBox.height
+    	);
+
+		return object.boundingBox.intersects(playerFutureBox) || playerFutureBox.intersects(object.boundingBox);
+	};
+
+	Player.prototype.intersectsLeft = function (object) {
+    	var playerFutureBox = new Rectangle(
+    		this.boundingBox.x - this.velocityX - 1,
+    		this.boundingBox.y,
+    		this.boundingBox.width,
+    		this.boundingBox.height
+    	);
+
+		return object.boundingBox.intersects(playerFutureBox) || playerFutureBox.intersects(object.boundingBox);
+	};
 
     return Player;
 }());
