@@ -96,13 +96,14 @@
 var Yosemity = (function() {
     function Yosemity(x, y) {
         this.position = new Vector2(x,y);
-        this.movement = {
-            left: false,
-            right: false,
-            up: false,
-            down: false
-        };
-        this.velocity = 2;
+        //this.movement = {
+        //    left: false,
+        //    right: false,
+        //    up: false,
+        //    down: false
+        //};
+        this.velocity = -2;
+        this.velocityModifyer = 0;
         this.width = 77.5;
         this.height = 60;
         this.animation = new Animation(
@@ -126,19 +127,21 @@ var Yosemity = (function() {
     }
 
     Yosemity.prototype.update = function() {
-        if((this.movement.right) && (this.position.x <= 500)) {
-            this.position.x += this.velocity;
-        }
-        else if(this.movement.left) {
-            this.position.x -= this.velocity;
-        };
+        //if((this.movement.right) && (this.position.x <= 500)) {
+        //    this.position.x += this.velocity;
+        //}
+        //else if(this.movement.left) {
+        //    this.position.x -= this.velocity;
+        //};
+        //
+        //if(this.movement.up) {
+        //    this.position.y -= this.velocity;
+        //}
+        //else if((this.movement.down) && (this.position.y <= 390)) {
+        //    this.position.y += this.velocity;
+        //}
 
-        if(this.movement.up) {
-            this.position.y -= this.velocity;
-        }
-        else if((this.movement.down) && (this.position.y <= 390)) {
-            this.position.y += this.velocity;
-        }
+        this.position.x += this.velocity + this.velocityModifyer;
 
 
         this.animation.position.set(this.position.x, this.position.y);
