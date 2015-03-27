@@ -29,7 +29,7 @@ var Player = (function() {
                 0,
                 4,
                 'images/BugsBunny.png',
-                6, // 5 for better jump
+                5, // 5 for better jump
                 4,
                 4
             ),
@@ -103,10 +103,10 @@ var Player = (function() {
 	        }
         }
         else if(this.movement.down) {
-        	this.movement.jump = false;
         	if(this.position.y <= ground) {
             	this.position.y += this.velocityY / 2;
         	} else { 
+        		this.movement.jump = false;
         		this.movement.down = false;
         		this.canJump = true;
         		this.jumpValue = 0;
@@ -137,7 +137,7 @@ var Player = (function() {
     		this.animation.setLimit(4);
     		this.animation.setRow(3)
     	
-    	} else if(this.movement.jump && this.canJump) {
+    	} else if(this.movement.jump) {
 		 	if (this.movement.left) {
             	this.animation.setLimit(4);
             	this.animation.setRow(4);
