@@ -7,6 +7,7 @@ var Player = (function() {
             down: false,
             jump: false,
             spin: false,
+            signUp: false,
             idle: true
         };
 
@@ -116,6 +117,11 @@ var Player = (function() {
         		alert('dead');
         		this.alerts++;
         	}
+
+            if (player.intersects(spike2) && this.alerts === 0) {
+                alert('dead');
+                this.alerts++;
+            }
         }
 
 
@@ -152,6 +158,10 @@ var Player = (function() {
         } else if(this.movement.left) {
             this.animation.setLimit(4);
             this.animation.setRow(2);
+
+        } else if(this.movement.signUp) {
+            this.animation.setLimit(4);
+            this.animation.setRow(3);
 
         } else {
             this.animation.setLimit(4);

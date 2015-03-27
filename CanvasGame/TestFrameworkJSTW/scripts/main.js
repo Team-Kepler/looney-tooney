@@ -57,6 +57,7 @@ function tick() {
         player.movement.right = false;
         player.movement.left = false;
         player.movement.spin = false;
+        player.movement.signUp = false;
         player.movement.idle = true;
     }
 
@@ -79,10 +80,11 @@ function tick() {
         } else if (player.character === 'taz') {
             player.movement.spin = true;
             player.movement.idle = false;
+        } else if (player.character === 'daffy') {
+            player.movement.signUp = true;
+            player.movement.idle = false;
         }
     }
-
-
 
 
     player.update();
