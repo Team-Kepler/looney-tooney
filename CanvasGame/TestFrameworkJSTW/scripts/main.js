@@ -9,11 +9,13 @@ attachListeners(input);
 var bckgImg = new Image();
 bckgImg.src = 'images/background-two.png';
 
-var spike1 = new Spike(280, 480),
-    spike2 = new Spike(480, 480);
 
-var player = new Player(100, 460);
-var yosemity = new Yosemity(200,300);
+spike1 = new Spike(280, 480);
+spike2 = new Spike(480, 480);
+
+
+var player = new Player(100, 475);
+var yosemity = new Yosemity(900,499);
 
 
 function update() {
@@ -52,6 +54,9 @@ function tick() {
         }
     }
 
+
+
+
     player.update();
     yosemity.update();
 }
@@ -64,6 +69,8 @@ function render(ctx) {
 
     player.render(ctx);
     yosemity.render(ctx);
+
+
     spike1.render(ctx);
     spike2.render(ctx);
 

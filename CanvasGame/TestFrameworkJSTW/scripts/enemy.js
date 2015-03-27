@@ -103,18 +103,18 @@ var Yosemity = (function() {
             down: false
         };
         this.velocity = 2;
-        this.width = 76.5;
+        this.width = 77.5;
         this.height = 60;
         this.animation = new Animation(
             this.width,
             this.height,
-            0,
-            0,
-            4,
-            'images/yose.png',
+            1,
+            1,
             3,
-            0,
-            4
+            'images/yose.png',
+            7,
+            4,
+            1
         );
 
         this.boundingBox = new Rectangle (
