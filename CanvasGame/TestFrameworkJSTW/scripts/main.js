@@ -7,7 +7,7 @@ var input = new Input();
 attachListeners(input);
 
 var bckgImg = new Image();
-bckgImg.src = 'images/background.png'
+bckgImg.src = 'images/background.jpg'
 
 function Background() {
     this.x = 0,
@@ -15,8 +15,8 @@ function Background() {
         this.width = bckgImg.width,
         this.height = bckgImg.height;
     this.render = function() {
-        ctx.drawImage(bckgImg, this.x += -1, 0, canvas.width, canvas.height);
-        if(this.x <= -580) {
+        ctx.drawImage(bckgImg, this.x -= 1, 0, bckgImg.width, canvas.height);
+        if(this.x <= -1099) {
             this.x = 0;
         }
     }

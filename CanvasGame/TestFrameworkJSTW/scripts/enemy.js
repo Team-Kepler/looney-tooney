@@ -102,7 +102,7 @@ var Yosemity = (function() {
         //    up: false,
         //    down: false
         //};
-        this.velocity = -2;
+        this.velocity = -4;
         this.velocityModifyer = 0;
         this.width = 77.5;
         this.height = 60;
@@ -141,7 +141,7 @@ var Yosemity = (function() {
         //    this.position.y += this.velocity;
         //}
 
-        this.position.x += this.velocity + this.velocityModifyer;
+
 
 
         this.animation.position.set(this.position.x, this.position.y);
