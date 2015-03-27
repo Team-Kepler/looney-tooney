@@ -329,6 +329,10 @@ var Animation = (function() {
         this.image.src = imgSrc;
         this.position = new Vector2(0);
         this.cropPostion = new Vector2(0);
+
+        this.jumpScene = 0;
+        this.delayValue = 0;
+        this.delayDuration = 5;
     }
 
 
@@ -373,6 +377,32 @@ var Animation = (function() {
      */
     Animation.prototype.setHeight = function(height) {
         this.height = height;
+    };
+
+    /**
+     * @constructor
+     */
+    Animation.prototype.updateJump = function() {
+        if(this.jumpScene !== 3 || this.delayValue === this.delayDuration) {
+            this.cropPostion.x = this.width * this.column;
+            this.cropPostion.y = this.height * this.row;
+
+            if(!this.columns)
+                this.columns = this.image.width / this.width;
+            if(!this.rows)
+                this.rows = this.image.height / this.height;
+
+            if (this.jumpScene === 4) {
+                this.jumpScene = 0;
+            } else {
+                this.jumpScene++;
+            }
+            this.delayValue = 0;
+        } else {
+            this.delayValue++;
+            console.log("jumpScene - " + this.jumpScene);
+        }
+        
     };
 
     /**
