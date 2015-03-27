@@ -99,16 +99,14 @@ function render(ctx) {
     //console.log('j0ohn')
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   //  ctx.drawImage(bckgImg, 0, 0, canvas.width, canvas.height);
-    ctx.font="25px Arial";
-    ctx.fillStyle="white";
-    ctx.fillText("Scores: "+scores,100,50);
-    ctx.fillText("Timer: "+timer,340,50);
-    ctx.fillText("Lives: "+lives,550,50);
+    background.render(ctx);
+
 
     background.render(ctx);
     player.render(ctx);
     yosemity.render(ctx);
     fallingBonus.render(ctx);
+
 
 
     spike1.render(ctx);
@@ -122,6 +120,12 @@ function render(ctx) {
     ctx.rect(player.boundingBox.x, player.boundingBox.y, player.boundingBox.width, player.boundingBox.height);
     
     ctx.stroke();
+
+    ctx.font="25px Arial";
+    ctx.fillStyle="white";
+    ctx.fillText("Scores: "+scores,100,50);
+    ctx.fillText("Timer: "+timer,340,50);
+    ctx.fillText("Lives: "+lives,550,50);
 
 
 }

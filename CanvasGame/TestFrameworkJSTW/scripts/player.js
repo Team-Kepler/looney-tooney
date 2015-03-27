@@ -161,7 +161,7 @@ var Player = (function() {
 
         } else if(this.movement.signUp) {
             this.animation.setLimit(4);
-            this.animation.setRow(3);
+            this.animation.setRow(4);
 
         } else {
             this.animation.setLimit(4);
