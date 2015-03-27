@@ -10,7 +10,7 @@ var bckgImg = new Image();
 bckgImg.src = 'images/backgroundWide.png';
 
 var bckgClouds = new Image();
-bckgClouds.src = 'images/clouds3.jpg';
+bckgClouds.src = 'images/clouds1.jpg';
 
 function Background() {
     this.x = 0,
@@ -18,7 +18,7 @@ function Background() {
         this.width = bckgImg.width,
         this.height = bckgImg.height;
     this.render = function() {
-        ctx.drawImage(bckgImg, this.x -= 1, 0, bckgImg.width, canvas.height);
+        ctx.drawImage(bckgImg, this.x -= 3, 0, bckgImg.width, canvas.height);
         if(this.x <= -1099) {
             this.x = 0;
         }
