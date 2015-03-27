@@ -2,7 +2,7 @@ var Spike = (function() {
     function Spike(x, y) {
         this.position = new Vector2(x,y);
 
-        this.width = 28;
+        this.width = 40;
         this.height = 75;
         this.sprite = new Image();
         this.sprite.src = 'images/spike.png';

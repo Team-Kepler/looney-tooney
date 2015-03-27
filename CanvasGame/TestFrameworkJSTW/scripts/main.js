@@ -80,6 +80,9 @@ function tick() {
         } else if (player.character === 'taz') {
             player.movement.spin = true;
             player.movement.idle = false;
+            if((player.position.x === 280) || player.boundingBox.intersects(spike1.boundingBox)){
+                spike1 = new Spike(1300, 10);
+            }
         } else if (player.character === 'daffy') {
             player.movement.signUp = true;
             player.movement.idle = false;
@@ -99,7 +102,7 @@ function render(ctx) {
     //console.log('j0ohn')
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   //  ctx.drawImage(bckgImg, 0, 0, canvas.width, canvas.height);
-    background.render(ctx);
+    /*background.render(ctx);*/
 
 
     background.render(ctx);
