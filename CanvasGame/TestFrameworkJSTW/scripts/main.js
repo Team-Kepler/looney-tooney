@@ -7,7 +7,7 @@ var input = new Input();
 attachListeners(input);
 
 var bckgImg = new Image();
-bckgImg.src = 'images/background-two.png';
+bckgImg.src = 'images/background.png';
 
 
 spike1 = new Spike(280, 480);
