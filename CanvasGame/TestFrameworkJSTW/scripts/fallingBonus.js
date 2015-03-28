@@ -10,33 +10,20 @@ var FallingBonus = (function() {
             idle: true
         };
         this.velocity = 2;
-        this.width = 30;
-        this.height = 30;
-        this.animationLib = {
-            carrot: new Animation(
+        this.width = 60;
+        this.height = 60;
+        this.animation =
+             new Animation(
                 this.width,
                 this.height,
                 0,
                 0,
                 4,
-                'images/carrot.png',
+                'images/bonus.png',
                 4,
                 0,
                 4
-            )
-            //quote: new Animation(
-            //    this.width,
-            //    this.height,
-            //    0,
-            //    1,
-            //    4,
-            //    'images/carrot.png',
-            //    4,
-            //    0,
-            //    4
-            //)
-        };
-        this.animation = this.animationLib.carrot;
+             );
         this.boundingBox = new Rectangle (
             x,
             y,
@@ -60,7 +47,7 @@ var FallingBonus = (function() {
             this.animation.setLimit(1);
             this.animation.setRow(0);
         }
-        else if(player.character==='daffy'){
+        if(player.character==='daffy'){
             this.animation.setLimit(1);
             this.animation.setRow(0);
             this.animation.setColumn(1);
