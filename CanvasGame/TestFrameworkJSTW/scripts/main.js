@@ -60,6 +60,7 @@ function tick() {
                 player.movement.right = false;
                 player.movement.left = true;
                 player.movement.idle = false;
+                background.position.x += 3;
             }
 
         } 
