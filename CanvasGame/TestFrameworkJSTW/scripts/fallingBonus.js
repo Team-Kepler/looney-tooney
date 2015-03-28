@@ -10,8 +10,8 @@ var FallingBonus = (function() {
             idle: true
         };
         this.velocity = 2;
-        this.width = 80;
-        this.height = 40;
+        this.width = 30;
+        this.height = 30;
         this.animationLib = {
             carrot: new Animation(
                 this.width,

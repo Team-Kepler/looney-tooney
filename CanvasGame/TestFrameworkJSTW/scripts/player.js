@@ -66,7 +66,10 @@ var Player = (function() {
             this.height / 2
         );
 
-        this.alerts = 0;
+        this.lives = 3;
+        this.immuneDuration = 40;
+        this.immuneValue = 0;
+        this.score = 0;
     }
 
     Player.prototype.update = function() {
@@ -81,19 +84,28 @@ var Player = (function() {
             this.animation = this.animationLib.taz;
         }
 
-        if(this.movement.right) {
-            if(!player.intersectsRight(spike1)) {
-            	this.position.x += this.velocityX;
+        if (!this.movement.spin) {
+            if(this.movement.right) {
+                if(!this.intersectsRight(spike1) && !this.intersectsRight(spike2)) {
+                    this.position.x += this.velocityX;
+                }
             }
-        }
-        else if(this.movement.left) {
-            if(!player.intersectsLeft(spike1)) {
-            	this.position.x -= this.velocityX;
+            else if(this.movement.left) {
+                if(!this.intersectsLeft(spike1)) {
+                    this.position.x -= this.velocityX;
+                }
+            }
+        } else {
+            if(this.movement.right) {
+                this.position.x += this.velocityX;
+            }
+            else if(this.movement.left) {
+                 this.position.x -= this.velocityX;
             }
         }
 
         if((this.movement.jump || this.jumpValue > 0) && this.canJump) {  
-        	player.movement.down = false;
+        	this.movement.down = false;
         	if (this.jumpValue <= this.jumpDuration) {	
 	            this.position.y -= this.velocityY;
 	            this.jumpValue++;
@@ -113,15 +125,25 @@ var Player = (function() {
         		this.jumpValue = 0;
         	}
 
-        	if (player.intersects(spike1) && this.alerts === 0) {
-        		alert('dead');
-        		this.alerts++;
-        	}
+            if (this.immuneValue > 0) {
+                this.immuneValue++;
+                if(this.immuneValue === this.immuneDuration) {
+                    this.immuneValue = 0;
+                }
+            }  
 
-            if (player.intersects(spike2) && this.alerts === 0) {
-                alert('dead');
-                this.alerts++;
+            if (this.intersects(spike1) || this.intersects(spike2)) {
+                if (this.immuneValue === 0) {
+                    this.lives--;
+                    this.immuneValue++;
+                    
+                    if(this.lives >= 0) {
+                        this.position.x = 100;
+                        this.position.y = 475;
+                    }
+                }            
             }
+
         }
 
 
@@ -130,7 +152,6 @@ var Player = (function() {
         this.boundingBox.y = this.position.y + (this.height / 4);
 
         if(this.movement.jump) {
-        	//this.animation.updateJump();
         	this.animation.update();
         } else {
         	this.animation.update();
