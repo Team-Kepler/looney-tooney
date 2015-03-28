@@ -98,6 +98,9 @@ function tick() {
 
             player.score++;
             fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
+            if(player.character==='daffy'){
+                player.score+=5;
+            }
         
         } else if(fallingBonus.position.y >= 580){   
 

@@ -28,9 +28,9 @@ var FallingBonus = (function() {
             //    this.width,
             //    this.height,
             //    0,
-            //    0,
+            //    1,
             //    4,
-            //    'images/DaffyQuote.png',
+            //    'images/carrot.png',
             //    4,
             //    0,
             //    4
@@ -56,8 +56,20 @@ var FallingBonus = (function() {
 
 
     FallingBonus.prototype.render = function(ctx) {
+        if(player.character==='bugs') {
             this.animation.setLimit(1);
             this.animation.setRow(0);
+        }
+        else if(player.character==='daffy'){
+            this.animation.setLimit(1);
+            this.animation.setRow(0);
+            this.animation.setColumn(1);
+        }
+        else{
+            this.animation.setLimit(1);
+            this.animation.setRow(0);
+            this.animation.setColumn(0);
+        }
 
         this.animation.draw(ctx);
     };
