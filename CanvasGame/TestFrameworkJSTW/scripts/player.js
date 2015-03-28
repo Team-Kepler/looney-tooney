@@ -100,8 +100,8 @@ var Player = (function() {
                 this.position.x += this.velocityX;
             }
             else if(this.movement.left) {
-                 this.position.x -= this.velocityX;
-            }
+                    this.position.x -= this.velocityX;
+                }
         }
 
         if((this.movement.jump || this.jumpValue > 0) && this.canJump) {  

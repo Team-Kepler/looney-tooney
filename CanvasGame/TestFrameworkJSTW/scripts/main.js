@@ -6,24 +6,8 @@ var ground = 460; // the ground y value
 var input = new Input();
 attachListeners(input);
 
-var bckgImg = new Image();
-bckgImg.src = 'images/backgroundWide.png';
-
 var bckgClouds = new Image();
 bckgClouds.src = 'images/clouds1.jpg';
-
-function Background() {
-    this.x = 0,
-        this.y = 0,
-        this.width = bckgImg.width,
-        this.height = bckgImg.height;
-    this.render = function() {
-        ctx.drawImage(bckgImg, this.x -= 3, 0, bckgImg.width, canvas.height);
-        if(this.x <= -1099) {
-            this.x = 0;
-        }
-    }
-}
 
 var background = new Background();
 
@@ -48,7 +32,6 @@ function update() {
 }
 
 function tick() {
-
     if(!gameOver) {
 
         if (player.lives < 0) {
@@ -65,14 +48,19 @@ function tick() {
         }
 
         if(input.d || input.right) {
-            player.movement.right = true;
-            player.movement.left = false;
-            player.movement.idle = false;
+            if(player.position.x<900) {
+                player.movement.right = true;
+                player.movement.left = false;
+                player.movement.idle = false;
+                background.position.x -= 3;
+            }
 
         } else if(input.a || input.left) {
-            player.movement.right = false;
-            player.movement.left = true;
-            player.movement.idle = false;
+            if(player.position.x>=0) {
+                player.movement.right = false;
+                player.movement.left = true;
+                player.movement.idle = false;
+            }
 
         } 
 
@@ -106,7 +94,7 @@ function tick() {
 
             fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
         }
-
+        background.update();
         player.update();
         yosemity.update();
         fallingBonus.update();
