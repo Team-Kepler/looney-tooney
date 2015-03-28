@@ -14,7 +14,7 @@ var Background=(function () {
         if (this.position.x <= -1099) {
             this.position.x = 0;
         }
-        else if (this.position.x >= 0) {
+        else if (this.position.x > 0) {
             this.position.x = - 1099;
         }
     };
