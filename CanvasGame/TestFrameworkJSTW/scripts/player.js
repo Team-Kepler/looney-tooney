@@ -30,7 +30,7 @@ var Player = (function() {
                 0,
                 4,
                 'images/BugsBunny.png',
-                5, // 5 for better jump
+                5,
                 4,
                 4
             ),

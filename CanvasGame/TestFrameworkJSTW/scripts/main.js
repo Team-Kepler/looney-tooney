@@ -137,7 +137,6 @@ function render(ctx) {
     drawBoundingBoxes();
 
     ctx.font = "40px Berkshire Swash, cursive";
-   // ctx.strokeStyle = "pink";
     ctx.fillStyle = "pink";
 
 
@@ -147,9 +146,9 @@ function render(ctx) {
 
 
     if(gameOver) {
-        ctx.font = "30pt Comic Sans MS";
+        ctx.font = "40px Berkshire Swash, cursive";
         ctx.fillStyle = 'yellow';
-        ctx.fillText('Game Over', 420, 270);
+        ctx.fillText('Game Over', 480, 270);
     }
 
 

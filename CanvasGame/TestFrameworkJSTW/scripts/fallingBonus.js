@@ -25,10 +25,10 @@ var FallingBonus = (function() {
                 4
              );
         this.boundingBox = new Rectangle (
-            x,
-            y,
-            this.width,
-            this.height
+            x + this.width / 4,
+            y + this.height / 4,
+            this.width / 2,
+            this.height / 2
         );
     }
 
@@ -36,8 +36,8 @@ var FallingBonus = (function() {
 
         this.position.y += this.velocity;
         this.animation.position.set(this.position.x, this.position.y);
-        this.boundingBox.x = this.position.x;
-        this.boundingBox.y = this.position.y;
+        this.boundingBox.x = this.position.x + this.width / 4;
+        this.boundingBox.y = this.position.y + this.height / 4;
         this.animation.update();
     };
 
