@@ -6,24 +6,8 @@ var ground = 460; // the ground y value
 var input = new Input();
 attachListeners(input);
 
-var bckgImg = new Image();
-bckgImg.src = 'images/backgroundWide.png';
-
 var bckgClouds = new Image();
 bckgClouds.src = 'images/clouds1.jpg';
-
-function Background() {
-    this.x = 0,
-        this.y = 0,
-        this.width = bckgImg.width,
-        this.height = bckgImg.height;
-    this.render = function() {
-        ctx.drawImage(bckgImg, this.x -= 3, 0, bckgImg.width, canvas.height);
-        if(this.x <= -1099) {
-            this.x = 0;
-        }
-    }
-}
 
 var background = new Background();
 
@@ -32,13 +16,13 @@ var spike2 = new Spike(480, 480);
 var newSpike;
 
 var player = new Player(100, 475);
-var yosemity = new Yosemity(900,499);
+var yosemity = new Yosemity(900,500);
 var fallingBonus=new FallingBonus(50,50);
 var timer = 0;
 var gameOver = false;
 
 function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min + 2)) + min;
 }
 
 function update() {
@@ -48,7 +32,6 @@ function update() {
 }
 
 function tick() {
-
     if(!gameOver) {
 
         if (player.lives < 0) {
@@ -65,14 +48,20 @@ function tick() {
         }
 
         if(input.d || input.right) {
-            player.movement.right = true;
-            player.movement.left = false;
-            player.movement.idle = false;
+            if(player.position.x < 1100) {
+                player.movement.right = true;
+                player.movement.left = false;
+                player.movement.idle = false;
+                background.position.x -= 3;
+            }
 
         } else if(input.a || input.left) {
-            player.movement.right = false;
-            player.movement.left = true;
-            player.movement.idle = false;
+            if(player.position.x >= 0) {
+                player.movement.right = false;
+                player.movement.left = true;
+                player.movement.idle = false;
+                background.position.x += 3;
+            }
 
         } 
 
@@ -120,6 +109,9 @@ function tick() {
             fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
         }
 
+
+
+        background.update();
         player.update();
         yosemity.update();
         fallingBonus.update();
@@ -131,26 +123,31 @@ function render(ctx) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(bckgClouds, 0, 0, canvas.width, canvas.height);
-    /*background.render(ctx);*/
+
 
     background.render(ctx);
     player.render(ctx);
+    spike1.render(ctx);
+    spike2.render(ctx);
     yosemity.render(ctx);
     fallingBonus.render(ctx);
 
-    spike1.render(ctx);
-    spike2.render(ctx);
+
 
     drawBoundingBoxes();
 
-    ctx.font = "25px Arial";
-    ctx.fillStyle = "white";
-    ctx.fillText("Scores: " + player.score, 100, 50);
-    ctx.fillText("Timer: " + timer, 340, 50);
-    ctx.fillText("Lives: " + player.lives, 550, 50);
+    ctx.font = "40px Berkshire Swash, cursive";
+   // ctx.strokeStyle = "pink";
+    ctx.fillStyle = "pink";
+
+
+    ctx.fillText("Scores: " + player.score, 250, 50);
+    ctx.fillText("Timer: " + timer, 490, 50);
+    ctx.fillText("Lives: " + player.lives, 700, 50);
+
 
     if(gameOver) {
-        ctx.font = "30pt Comic Sans MS"
+        ctx.font = "30pt Comic Sans MS";
         ctx.fillStyle = 'yellow';
         ctx.fillText('Game Over', 420, 270);
     }
