@@ -91,16 +91,16 @@ var Player = (function() {
                 }
             }
             else if(this.movement.left) {
-                if(!this.intersectsLeft(spike1)) {
+                if(!this.intersectsLeft(spike1) && !this.intersectsLeft(spike2)) {
                     this.position.x -= this.velocityX;
                 }
             }
         } else {
             if(this.movement.right) {
-                this.position.x += this.velocityX;
+                this.position.x += this.velocityX * 2;
             }
             else if(this.movement.left) {
-                 this.position.x -= this.velocityX;
+                 this.position.x -= this.velocityX * 2;
             }
         }
 

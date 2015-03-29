@@ -29,7 +29,7 @@ var background = new Background();
 
 var spike1 = new Spike(280, 480);
 var spike2 = new Spike(480, 480);
-
+var newSpike;
 
 var player = new Player(100, 475);
 var yosemity = new Yosemity(900,499);
@@ -83,10 +83,21 @@ function tick() {
             } else if (player.character === 'taz') {
                 player.movement.spin = true;
                 player.movement.idle = false;
+
                 if(player.intersects(spike1)){
-                    spike1 = new Spike(getRandomInt(50, 900), 480);
+                    do {
+                        newSpike = new Spike(getRandomInt(50, 900), 480);
+                    } while (newSpike.intersectsRight(spike2) || newSpike.intersectsLeft(spike2)); 
+                   
+                    spike1 = newSpike;
+
                 } else if(player.intersects(spike2)) {
-                    spike2 = new Spike(getRandomInt(50, 900), 480);
+
+                    do {
+                        newSpike = new Spike(getRandomInt(50, 900), 480);
+                    } while (newSpike.intersectsRight(spike1) || newSpike.intersectsLeft(spike1));
+                   
+                    spike2 = newSpike;
                 }
             } else if (player.character === 'daffy') {
                 player.movement.signUp = true;
@@ -94,13 +105,15 @@ function tick() {
             }
         }
 
-        if(player.intersects(fallingBonus) && player.character !== 'taz') {
-
-            player.score++;
-            fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
+        if(player.intersects(fallingBonus) && player.character !== 'taz') {            
+            
             if(player.character==='daffy'){
-                player.score+=5;
+                player.score += 5;
+            } else {
+                player.score++;
             }
+            
+            fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
         
         } else if(fallingBonus.position.y >= 580){   
 
