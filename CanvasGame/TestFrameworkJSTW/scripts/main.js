@@ -22,6 +22,7 @@ var fallingPresent=new FallingPresent(50,100);
 var timer = 0;
 var gameOver = false;
 var timeToGiftCreation=0;
+var roadRunner=new RoadRunner(1200,475);
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 2)) + min;
@@ -114,6 +115,7 @@ function tick() {
 
         if(player.intersects(fallingPresent)){
             player.lives++;
+            roadRunner.movement.left = true;
             fallingPresent = new FallingPresent(1200, 10);
         }
 
@@ -126,6 +128,7 @@ function tick() {
 
 
         background.update();
+        roadRunner.update();
         player.update();
         yosemity.update();
         fallingBonus.update();
@@ -141,6 +144,7 @@ function render(ctx) {
 
 
     background.render(ctx);
+    roadRunner.render(ctx);
     player.render(ctx);
     spike1.render(ctx);
     spike2.render(ctx);
@@ -179,6 +183,7 @@ function drawBoundingBoxes() {
     ctx.rect(player.boundingBox.x, player.boundingBox.y, player.boundingBox.width, player.boundingBox.height);
     ctx.rect(fallingBonus.boundingBox.x, fallingBonus.boundingBox.y, fallingBonus.boundingBox.width, fallingBonus.boundingBox.height);
     ctx.rect(fallingPresent.boundingBox.x, fallingPresent.boundingBox.y, fallingPresent.boundingBox.width, fallingPresent.boundingBox.height);
+    ctx.rect(roadRunner.boundingBox.x, roadRunner.boundingBox.y, roadRunner.boundingBox.width, roadRunner.boundingBox.height);
 
     ctx.stroke();
 }
