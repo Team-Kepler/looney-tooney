@@ -1,14 +1,6 @@
 var FallingBonus = (function() {
     function FallingBonus(x, y) {
         this.position = new Vector2(x,y);
-        this.movement = {
-            left: false,
-            right: false,
-            up: false,
-            down: false,
-            jump: false,
-            idle: true
-        };
         this.velocity = 2;
         this.width = 60;
         this.height = 60;

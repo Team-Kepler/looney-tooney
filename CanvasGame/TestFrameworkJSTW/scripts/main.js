@@ -18,8 +18,10 @@ var newSpike;
 var player = new Player(100, 475);
 var yosemity = new Yosemity(900,500);
 var fallingBonus=new FallingBonus(50,50);
+var fallingPresent=new FallingPresent(50,100);
 var timer = 0;
 var gameOver = false;
+var timeToGiftCreation=0;
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 2)) + min;
@@ -32,8 +34,9 @@ function update() {
 }
 
 function tick() {
+    timeToGiftCreation=Math.floor(new Date().getTime()/1000)%60;
+    //console.log(timeToGiftCreation);
     if(!gameOver) {
-
         if (player.lives < 0) {
             console.log('You died!');
             gameOver = true;
@@ -109,12 +112,24 @@ function tick() {
             fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
         }
 
+        if(player.intersects(fallingPresent)){
+            player.lives++;
+            fallingPresent = new FallingPresent(1200, 10);
+        }
+
+        if(fallingPresent.position.y >= 580){
+            if(timeToGiftCreation===0) {
+                fallingPresent = new FallingPresent(getRandomInt(20, 950), 10);
+            }
+        }
+
 
 
         background.update();
         player.update();
         yosemity.update();
         fallingBonus.update();
+        fallingPresent.update();
 
     }
 }
@@ -131,6 +146,7 @@ function render(ctx) {
     spike2.render(ctx);
     yosemity.render(ctx);
     fallingBonus.render(ctx);
+    fallingPresent.render(ctx);
 
 
 
@@ -162,6 +178,7 @@ function drawBoundingBoxes() {
     ctx.rect(spike2.boundingBox.x, spike2.boundingBox.y, spike2.boundingBox.width, spike2.boundingBox.height);
     ctx.rect(player.boundingBox.x, player.boundingBox.y, player.boundingBox.width, player.boundingBox.height);
     ctx.rect(fallingBonus.boundingBox.x, fallingBonus.boundingBox.y, fallingBonus.boundingBox.width, fallingBonus.boundingBox.height);
+    ctx.rect(fallingPresent.boundingBox.x, fallingPresent.boundingBox.y, fallingPresent.boundingBox.width, fallingPresent.boundingBox.height);
 
     ctx.stroke();
 }
