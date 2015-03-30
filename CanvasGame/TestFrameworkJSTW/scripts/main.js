@@ -11,29 +11,34 @@ bckgClouds.src = 'images/clouds1.jpg';
 
 var background = new Background();
 
+var player = new Player(100, 475);
 
-
-var bullet1 = new Bullet(1120, 520);
-var bullet2 = new Bullet(1120, 510);
-
-var spike1 = new Spike(getRandomInt(50, 900), 480);
-var spike2 = new Spike(getRandomInt(50, 900), 480);
+var spike1;
+var spike2;
 var newSpike;
 do {
     newSpike = new Spike(getRandomInt(50, 900), 480);
-} while (newSpike.intersectsRight(spike1) || newSpike.intersectsLeft(spike1));
+} while (newSpike.intersects(player));
+
+spike1 = newSpike;
+
+do {
+    newSpike = new Spike(getRandomInt(50, 900), 480);
+} while (newSpike.intersectsRight(spike1) || newSpike.intersects(player));
 
 spike2 = newSpike;
 
-var player = new Player(100, 475);
-var yosemity = new Yosemity(900,500);
-var fallingBonus=new FallingBonus(getRandomInt(20, 950),50);
-var fallingPresent=new FallingPresent(getRandomInt(20, 950),100);
+var yosemity = new Yosemity(900, 500);
+var bullet1 = new Bullet(1120, 520);
+var bullet2 = new Bullet(1120, 510);
+
+var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50);
+var fallingPresent = new FallingPresent(getRandomInt(20, 950), 100);
 var timer = 0;
 var gameOver = false;
-var timeToGiftCreation=0;
-var roadRunner = new RoadRunner(1200,475);
-var coyote = new Coyote(1300,475);
+var timeToGiftCreation = 0;
+var roadRunner = new RoadRunner(1200, 475);
+var coyote = new Coyote(1200, 475);
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 2)) + min;
@@ -49,8 +54,7 @@ function tick() {
     timeToGiftCreation = Math.floor(new Date().getTime()/1000)%60;
     //console.log(timeToGiftCreation);
     if(!gameOver) {
-        if (player.lives === 0 || player.score>=50) {
-            console.log('You died!');
+        if (player.lives === 0 || player.score >= 50) {
             gameOver = true;
         }
 
@@ -192,26 +196,35 @@ function render(ctx) {
 
 
 
-    drawBoundingBoxes();
+    //drawBoundingBoxes();
 
     ctx.font = "40px Berkshire Swash, cursive";
     ctx.fillStyle = "pink";
 
 
-    ctx.fillText("Scores: " + player.score+"/50", 250, 50);
+    ctx.fillText("Scores: " + player.score + "/50", 250, 50);
     ctx.fillText("Timer: " + timer, 490, 50);
     ctx.fillText("Lives: " + player.lives, 700, 50);
 
 
     if(gameOver) {
+        ctx.fillStyle = '#6D493B';
+        ctx.rect(420, 150, 300, 200);
+        ctx.fill();
+        ctx.strokeStyle = '#717935';
+        ctx.lineWidth = 7;
+        ctx.rect(420, 150, 300, 200);
+        ctx.stroke();
+
+        ctx.fillStyle = "pink";
         ctx.font = "40px Berkshire Swash, cursive";
-        ctx.fillStyle = 'yellow';
-        ctx.fillText('Game Over', 480, 270);
+        ctx.fillText('Game Over', 480, 220);
         ctx.font = "35px Berkshire Swash, cursive";
-        if(player.score>=50) {
-            ctx.fillText('YOU WON!', 480, 350);
-        }else{
-            ctx.fillText('YOU LOST!', 480, 350);
+        
+        if(player.score >= 50) {
+            ctx.fillText('YOU WON!', 480, 300);
+        } else {
+            ctx.fillText('YOU LOST!', 480, 300);
         }
     }
 }
