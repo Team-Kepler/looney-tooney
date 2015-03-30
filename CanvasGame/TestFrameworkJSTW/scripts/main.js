@@ -9,7 +9,8 @@ bckgClouds.src = 'images/clouds1.jpg';
 
 var background = new Background();
 
-var player = new Player(100, 460);
+var ground = 460,
+    player = new Player(100, ground);
 
 var spike1,
     spike2,
@@ -33,8 +34,8 @@ var yosemity = new Yosemity(900, 500),
 
 var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50),
     fallingPresent = new FallingPresent(getRandomInt(20, 950), 100),
-    roadRunner = new RoadRunner(1200, 485),
-    coyote = new Coyote(1300, 485),
+    roadRunner = new RoadRunner(1200, 450),
+    coyote = new Coyote(1300, 450),
     timerMinutes = 0, 
     timerSeconds = 0,
     timerCurrentValue = 0,
@@ -42,7 +43,6 @@ var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50),
     timerLockZero = false,
     timerPad = '00',
     timeToGiftCreation = 0,
-    ground = 460,
     gameOver = false;
     
 
