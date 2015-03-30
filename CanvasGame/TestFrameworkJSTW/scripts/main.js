@@ -44,7 +44,7 @@ function tick() {
     timeToGiftCreation = Math.floor(new Date().getTime()/1000)%60;
     //console.log(timeToGiftCreation);
     if(!gameOver) {
-        if (player.lives === 0) {
+        if (player.lives === 0 || player.score>=50) {
             console.log('You died!');
             gameOver = true;
         }
@@ -195,7 +195,7 @@ function render(ctx) {
     ctx.fillStyle = "pink";
 
 
-    ctx.fillText("Scores: " + player.score, 250, 50);
+    ctx.fillText("Scores: " + player.score+"/50", 250, 50);
     ctx.fillText("Timer: " + timer, 490, 50);
     ctx.fillText("Lives: " + player.lives, 700, 50);
 
@@ -204,6 +204,12 @@ function render(ctx) {
         ctx.font = "40px Berkshire Swash, cursive";
         ctx.fillStyle = 'yellow';
         ctx.fillText('Game Over', 480, 270);
+        ctx.font = "35px Berkshire Swash, cursive";
+        if(player.score>=50) {
+            ctx.fillText('YOU WON!', 480, 350);
+        }else{
+            ctx.fillText('YOU LOST!', 480, 350);
+        }
     }
 }
 
