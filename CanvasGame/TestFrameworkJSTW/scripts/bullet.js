@@ -6,15 +6,15 @@ var Bullet = (function() {
             right: false
         };
         this.velocity = -7;
-        this.width = 40;
-        this.height = 40;
+        this.width = 80;
+        this.height = 26;
         this.animation = new Animation (
             this.width,
             this.height,
             0,
             0,
             1,
-            'images/bullet-rocket.png',
+            'images/bullets.png',
             6,
             0,
             0
