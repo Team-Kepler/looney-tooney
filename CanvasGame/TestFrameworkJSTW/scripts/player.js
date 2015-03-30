@@ -142,7 +142,7 @@ var Player = (function() {
                     
                     if(this.lives >= 0) {
                         this.position.x = 100;
-                        this.position.y = 475;
+                        this.position.y = 460;
                     }
                 }            
             }

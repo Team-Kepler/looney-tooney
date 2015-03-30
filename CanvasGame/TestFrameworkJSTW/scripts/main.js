@@ -1,8 +1,6 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
-var ground = 460; // the ground y value
-
 var input = new Input();
 attachListeners(input);
 
@@ -11,20 +9,21 @@ bckgClouds.src = 'images/clouds1.jpg';
 
 var background = new Background();
 
-var player = new Player(100, 475);
+var player = new Player(100, 460);
 
 var spike1,
     spike2,
     newSpike;
 do {
     newSpike = new Spike(getRandomInt(50, 900), 480);
-} while (newSpike.intersects(player));
+} while (newSpike.intersectsLeft(player) || newSpike.intersectsRight(player));
 
 spike1 = newSpike;
 
 do {
     newSpike = new Spike(getRandomInt(50, 900), 480);
-} while (newSpike.intersectsRight(spike1) || newSpike.intersects(player));
+} while (newSpike.intersectsLeft(spike1) || newSpike.intersectsRight(spike1) || 
+        newSpike.intersectsLeft(player) || newSpike.intersectsRight(player));
 
 spike2 = newSpike;
 
@@ -34,8 +33,8 @@ var yosemity = new Yosemity(900, 500),
 
 var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50),
     fallingPresent = new FallingPresent(getRandomInt(20, 950), 100),
-    roadRunner = new RoadRunner(1200, 475),
-    coyote = new Coyote(1300, 475),
+    roadRunner = new RoadRunner(1200, 485),
+    coyote = new Coyote(1300, 485),
     timerMinutes = 0, 
     timerSeconds = 0,
     timerCurrentValue = 0,
@@ -43,6 +42,7 @@ var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50),
     timerLockZero = false,
     timerPad = '00',
     timeToGiftCreation = 0,
+    ground = 460,
     gameOver = false;
     
 
@@ -213,9 +213,9 @@ function render(ctx) {
 
     background.render(ctx);
     player.render(ctx);
-    yosemity.render(ctx);
     spike1.render(ctx);
     spike2.render(ctx);
+    yosemity.render(ctx);
     fallingBonus.render(ctx);
     fallingPresent.render(ctx);
     bullet1.render(ctx);
