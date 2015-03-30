@@ -213,6 +213,7 @@ function drawBoundingBoxes() {
     ctx.rect(fallingBonus.boundingBox.x, fallingBonus.boundingBox.y, fallingBonus.boundingBox.width, fallingBonus.boundingBox.height);
     ctx.rect(fallingPresent.boundingBox.x, fallingPresent.boundingBox.y, fallingPresent.boundingBox.width, fallingPresent.boundingBox.height);
     ctx.rect(roadRunner.boundingBox.x, roadRunner.boundingBox.y, roadRunner.boundingBox.width, roadRunner.boundingBox.height);
+    ctx.rect(coyote.boundingBox.x, coyote.boundingBox.y, coyote.boundingBox.width, coyote.boundingBox.height);
 
     ctx.stroke();
 }

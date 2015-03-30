@@ -167,7 +167,7 @@ var Player = (function() {
                 if(this.immuneValue === this.immuneDuration) {
                     this.immuneValue = 0;
                 }
-            }  
+            }
 
             if (this.intersects(spike1) || this.intersects(spike2)) {
                 if (this.immuneValue === 0) {
