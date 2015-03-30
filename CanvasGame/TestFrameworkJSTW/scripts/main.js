@@ -13,17 +13,22 @@ var background = new Background();
 
 
 
-var bullet1 = new Bullet(1120,400);
-var bullet2 = new Bullet(1120,405);
+var bullet1 = new Bullet(1120, 520);
+var bullet2 = new Bullet(1120, 510);
 
-var spike1 = new Spike(280, 480);
-var spike2 = new Spike(480, 480);
+var spike1 = new Spike(getRandomInt(50, 900), 480);
+var spike2 = new Spike(getRandomInt(50, 900), 480);
 var newSpike;
+do {
+    newSpike = new Spike(getRandomInt(50, 900), 480);
+} while (newSpike.intersectsRight(spike1) || newSpike.intersectsLeft(spike1));
+
+spike2 = newSpike;
 
 var player = new Player(100, 475);
 var yosemity = new Yosemity(900,500);
-var fallingBonus=new FallingBonus(50,50);
-var fallingPresent=new FallingPresent(50,100);
+var fallingBonus=new FallingBonus(getRandomInt(20, 950),50);
+var fallingPresent=new FallingPresent(getRandomInt(20, 950),100);
 var timer = 0;
 var gameOver = false;
 var timeToGiftCreation=0;
@@ -133,26 +138,24 @@ function tick() {
         }
 
         //Yosemity shooting
-        if(yosemity.position.x >= 1001 && yosemity.position.x <= 1050) {
-            bullet1.position.x = yosemity.position.x;
-            bullet2.position.x = yosemity.position.x;
-            bullet1.position.y = 520;
-            bullet2.position.y = 510;
+        if(yosemity.position.x >= 1001 && yosemity.position.x <= 1050  && yosemity.movement.left) {
+            
+            bullet1 = new Bullet(yosemity.position.x, 520);
+            bullet2 = new Bullet(yosemity.position.x, 510);
             bullet1.movement.left = true;
             bullet2.movement.left = true;
-        }
-        else if(yosemity.position.x >= 0 && yosemity.position.x <= 80){
-            bullet1.position.x = yosemity.position.x;
-            bullet2.position.x = yosemity.position.x;
-            bullet1.position.y = 520;
-            bullet2.position.y = 510;
+
+        } else if(yosemity.position.x >= 0 && yosemity.position.x <= 10 && !yosemity.movement.left){
+            
+            bullet1 = new Bullet(yosemity.position.x + 77.5, 520);
+            bullet2 = new Bullet(yosemity.position.x + 77.5, 510);
             bullet1.movement.right = true;
             bullet2.movement.right = true;
         }
 
         if(player.intersects(bullet1) || player.intersects(bullet2)) {
-        	bullet1 = new Bullet(1120, 400);
-        	bullet2 = new Bullet(1120, 405);
+        	bullet1 = new Bullet(1120, 520);
+        	bullet2 = new Bullet(1120, 510);
         	player.lives--;
         }
 
