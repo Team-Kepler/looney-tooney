@@ -90,31 +90,10 @@ var Player = (function() {
                 if(!this.intersectsRight(spike1) && !this.intersectsRight(spike2)) {
                     this.position.x += this.velocityX;
                 }
-
-                if (this.intersects(bullet1) || this.intersects(bullet2)) {
-                    if (this.immuneValue === 0) {
-                        this.lives--;
-                        this.immuneValue++;
-                    }
-                }
             }
             else if(this.movement.left) {
                 if(!this.intersectsLeft(spike1) && !this.intersectsLeft(spike2)) {
                     this.position.x -= this.velocityX;
-                }
-
-                if (this.intersects(bullet1) || this.intersects(bullet2)) {
-                    if (this.immuneValue === 0) {
-                        this.lives--;
-                        this.immuneValue++;
-                    }
-                }
-            }
-
-            if (this.intersects(bullet1) || this.intersects(bullet2)) {
-                if (this.immuneValue === 0) {
-                    this.lives--;
-                    this.immuneValue++;
                 }
             }
 
@@ -126,12 +105,6 @@ var Player = (function() {
                  this.position.x -= this.velocityX * 2;
             }
 
-            if (this.intersects(bullet1) || this.intersects(bullet2)) {
-                if (this.immuneValue === 0) {
-                    this.lives--;
-                    this.immuneValue++;
-                }
-            }
         }
 
         if((this.movement.jump || this.jumpValue > 0) && this.canJump) {  
@@ -144,13 +117,6 @@ var Player = (function() {
 	        	this.movement.jump = false;
 	        	this.movement.down = true;
 	        }
-
-            if (this.intersects(bullet1) || this.intersects(bullet2)) {
-                if (this.immuneValue === 0) {
-                    this.lives--;
-                    this.immuneValue++;
-                }
-            }
         }
         else if(this.movement.down) {
         	if(this.position.y <= ground) {
@@ -181,20 +147,7 @@ var Player = (function() {
                 }            
             }
 
-            if (this.intersects(bullet1) || this.intersects(bullet2)) {
-                if (this.immuneValue === 0) {
-                    this.lives--;
-                    this.immuneValue++;
-                }
-            }
-
-        }else if (this.movement.idle &&(this.intersects(bullet1) || this.intersects(bullet2))) {
-            if (this.immuneValue === 0) {
-                this.lives--;
-                this.immuneValue++;
-            }
-        }
-
+        } 
 
         this.animation.position.set(this.position.x, this.position.y);
         this.boundingBox.x = this.position.x + (this.width / 2.5);

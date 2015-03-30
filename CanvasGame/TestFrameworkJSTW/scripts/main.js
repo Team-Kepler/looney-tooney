@@ -41,7 +41,7 @@ function update() {
 }
 
 function tick() {
-    timeToGiftCreation=Math.floor(new Date().getTime()/1000)%60;
+    timeToGiftCreation = Math.floor(new Date().getTime()/1000)%60;
     //console.log(timeToGiftCreation);
     if(!gameOver) {
         if (player.lives === 0) {
@@ -122,12 +122,12 @@ function tick() {
         if(player.intersects(fallingPresent)){
             player.lives++;
             roadRunner.movement.left = true;
-            coyote.movement.left=true;
+            coyote.movement.left = true;
             fallingPresent = new FallingPresent(1200, 10);
         }
 
         if(fallingPresent.position.y >= 580){
-            if(timeToGiftCreation===0) {
+            if(timeToGiftCreation === 0) {
                 fallingPresent = new FallingPresent(getRandomInt(20, 950), 10);
             }
         }
@@ -148,6 +148,12 @@ function tick() {
             bullet2.position.y = 510;
             bullet1.movement.right = true;
             bullet2.movement.right = true;
+        }
+
+        if(player.intersects(bullet1) || player.intersects(bullet2)) {
+        	bullet1 = new Bullet(1120, 400);
+        	bullet2 = new Bullet(1120, 405);
+        	player.lives--;
         }
 
         background.update();
