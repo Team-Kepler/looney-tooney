@@ -188,6 +188,11 @@ var Player = (function() {
                 }
             }
 
+        }else if (this.movement.idle &&(this.intersects(bullet1) || this.intersects(bullet2))) {
+            if (this.immuneValue === 0) {
+                this.lives--;
+                this.immuneValue++;
+            }
         }
 
 

@@ -28,6 +28,7 @@ var timer = 0;
 var gameOver = false;
 var timeToGiftCreation=0;
 var roadRunner = new RoadRunner(1200,475);
+var coyote = new Coyote(1300,475);
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 2)) + min;
@@ -121,6 +122,7 @@ function tick() {
         if(player.intersects(fallingPresent)){
             player.lives++;
             roadRunner.movement.left = true;
+            coyote.movement.left=true;
             fallingPresent = new FallingPresent(1200, 10);
         }
 
@@ -150,6 +152,7 @@ function tick() {
 
         background.update();
         roadRunner.update();
+        coyote.update();
         player.update();
         bullet1.update();
         bullet2.update();
@@ -168,6 +171,7 @@ function render(ctx) {
 
     background.render(ctx);
     roadRunner.render(ctx);
+    coyote.render(ctx);
     player.render(ctx);
     spike1.render(ctx);
     spike2.render(ctx);
@@ -195,8 +199,6 @@ function render(ctx) {
         ctx.fillStyle = 'yellow';
         ctx.fillText('Game Over', 480, 270);
     }
-
-
 }
 
 function drawBoundingBoxes() {
