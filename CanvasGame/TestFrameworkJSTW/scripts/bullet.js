@@ -6,15 +6,15 @@ var Bullet = (function() {
             right: false
         };
         this.velocity = -7;
-        this.width = 20;
-        this.height = 27;
+        this.width = 40;
+        this.height = 40;
         this.animation = new Animation (
             this.width,
             this.height,
             0,
             0,
             1,
-            'images/bullet.png',
+            'images/bullet-rocket.png',
             6,
             0,
             0
@@ -51,6 +51,15 @@ var Bullet = (function() {
     };
 
     Bullet.prototype.render = function() {
+        if(this.movement.right){
+            this.animation.setColumn(0);
+            this.animation.setRow(0);
+            this.animation.setLimit(1);
+        }else{
+            this.animation.setColumn(1);
+            this.animation.setRow(0);
+            this.animation.setLimit(1);
+        }
         this.animation.draw(ctx);
     };
 
