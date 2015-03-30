@@ -11,6 +11,11 @@ bckgClouds.src = 'images/clouds1.jpg';
 
 var background = new Background();
 
+
+
+var bullet1 = new Bullet(1120,400);
+var bullet2 = new Bullet(1120,405);
+
 var spike1 = new Spike(280, 480);
 var spike2 = new Spike(480, 480);
 var newSpike;
@@ -22,7 +27,7 @@ var fallingPresent=new FallingPresent(50,100);
 var timer = 0;
 var gameOver = false;
 var timeToGiftCreation=0;
-var roadRunner=new RoadRunner(1200,475);
+var roadRunner = new RoadRunner(1200,475);
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 2)) + min;
@@ -73,14 +78,16 @@ function tick() {
             if(player.character === 'bugs') {
                 player.movement.jump = true;
                 player.movement.idle = false;
-            } else if (player.character === 'taz') {
+            }
+            else if (player.character === 'taz') {
                 player.movement.spin = true;
                 player.movement.idle = false;
 
                 if(player.intersects(spike1)){
                     do {
                         newSpike = new Spike(getRandomInt(50, 900), 480);
-                    } while (newSpike.intersectsRight(spike2) || newSpike.intersectsLeft(spike2)); 
+                    }
+                    while (newSpike.intersectsRight(spike2) || newSpike.intersectsLeft(spike2));
                    
                     spike1 = newSpike;
 
@@ -98,18 +105,16 @@ function tick() {
             }
         }
 
-        if(player.intersects(fallingBonus) && player.character !== 'taz') {            
-            
+        if(player.intersects(fallingBonus) && player.character !== 'taz') {
             if(player.character==='daffy'){
                 player.score += 5;
             } else {
                 player.score++;
             }
-            
             fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
-        
-        } else if(fallingBonus.position.y >= 580){   
+        }
 
+        else if(fallingBonus.position.y >= 580){
             fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
         }
 
@@ -125,11 +130,33 @@ function tick() {
             }
         }
 
-
+        //Yosemity shooting
+        if(yosemity.position.x >= 1001 && yosemity.position.x <= 1050) {
+            bullet1.position.x = yosemity.position.x;
+            bullet2.position.x = yosemity.position.x;
+            bullet1.position.y = 520;
+            bullet2.position.y = 510;
+            bullet1.movement.left = true;
+            bullet2.movement.left = true;
+        }
+        else if(yosemity.position.x >= 0 && yosemity.position.x <= 80){
+            bullet1.position.x = yosemity.position.x;
+            bullet2.position.x = yosemity.position.x;
+            bullet1.position.y = 520;
+            bullet2.position.y = 510;
+            bullet1.movement.right = true;
+            bullet2.movement.right = true;
+        }
+        //death of the rabbit
+        if(bullet1.boundingBox.intersects(player.boundingBox)){
+            player.movement.dead = true;
+        }
 
         background.update();
         roadRunner.update();
         player.update();
+        bullet2.update();
+        bullet1.update();
         yosemity.update();
         fallingBonus.update();
         fallingPresent.update();
@@ -148,6 +175,8 @@ function render(ctx) {
     player.render(ctx);
     spike1.render(ctx);
     spike2.render(ctx);
+    bullet2.render(ctx);
+    bullet1.render(ctx);
     yosemity.render(ctx);
     fallingBonus.render(ctx);
     fallingPresent.render(ctx);

@@ -8,6 +8,7 @@ var Player = (function() {
             jump: false,
             spin: false,
             signUp: false,
+            dead: false,
             idle: true
         };
 
@@ -140,6 +141,7 @@ var Player = (function() {
                     if(this.lives >= 0) {
                         this.position.x = 100;
                         this.position.y = 475;
+
                     }
                 }            
             }
@@ -184,7 +186,13 @@ var Player = (function() {
             this.animation.setLimit(4);
             this.animation.setRow(4);
 
-        } else {
+        }
+        //dead
+        else if(this.movement.dead){
+            this.animation.setLimit(4);
+            this.animation.setRow(5);
+        }
+        else {
             this.animation.setLimit(4);
             this.animation.setRow(0);
         }

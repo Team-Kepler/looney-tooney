@@ -1,4 +1,12 @@
-div#canvas-container {
-	width: 1100px;
-	margin: 20px auto;
+body {
+background: #333;
+}
+
+.canvas_container {
+width: 1100px;
+margin: 25px auto;
+}
+
+#canvas {
+border: #999 3px solid;
 }
