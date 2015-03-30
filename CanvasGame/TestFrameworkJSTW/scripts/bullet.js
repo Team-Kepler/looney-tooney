@@ -31,14 +31,14 @@ var Bullet = (function() {
     Bullet.prototype.update = function() {
         if(this.movement.left) {
             this.position.x += this.velocity;
-            if (this.position.x <= -50) {
+            if (this.position.x <= -100) {
                 this.movement.left = false;
                 //this.movement.right = false;
             }
         }
         else if (this.movement.right) {
             this.position.x -= this.velocity;
-            if (this.position.x >= 1150) {
+            if (this.position.x >= 1200) {
                 this.movement.right = false;
             }
         }

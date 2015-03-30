@@ -40,6 +40,7 @@ var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50),
     timerSeconds = 0,
     timerCurrentValue = 0,
     timerLastValue = -1,
+    timerLockZero = false,
     timerPad = '00',
     timeToGiftCreation = 0,
     gameOver = false;
@@ -65,10 +66,16 @@ function tick() {
         }
 
         timerCurrentValue = Math.floor(new Date().getTime()/1000)%60;
-        if (timerCurrentValue === 0) {
+        //console.log(timerCurrentValue);
+
+        if (timerCurrentValue === 0 && !timerLockZero) {
             timerLastValue = -1;
+            timerLockZero = true;
         }
-        if(timerCurrentValue > timerLastValue) {
+        if (timerCurrentValue === 1) {
+            timerLockZero = false;
+        }
+        if (timerCurrentValue > timerLastValue) {
             timerLastValue = timerCurrentValue;
             timerSeconds++;
 
@@ -159,22 +166,22 @@ function tick() {
             if(timeToGiftCreation === 0) {
                 fallingPresent = new FallingPresent(getRandomInt(20, 950), 10);
                 roadRunner = new RoadRunner(1200, 475);
-                coyote = new Coyote(1220, 475);
+                coyote = new Coyote(1300, 475);
             }
         }
 
         //Yosemity shooting
         if(yosemity.position.x >= 1001 && yosemity.position.x <= 1050  && yosemity.movement.left) {
             
-            bullet1 = new Bullet(yosemity.position.x, 520);
-            bullet2 = new Bullet(yosemity.position.x, 510);
+            bullet1 = new Bullet(yosemity.position.x - 10, 520);
+            bullet2 = new Bullet(yosemity.position.x - 10, 510);
             bullet1.movement.left = true;
             bullet2.movement.left = true;
 
         } else if(yosemity.position.x >= 0 && yosemity.position.x <= 10 && !yosemity.movement.left){
             
-            bullet1 = new Bullet(yosemity.position.x + 77.5, 520);
-            bullet2 = new Bullet(yosemity.position.x + 77.5, 510);
+            bullet1 = new Bullet(yosemity.position.x + 40, 520);
+            bullet2 = new Bullet(yosemity.position.x + 40, 510);
             bullet1.movement.right = true;
             bullet2.movement.right = true;
         }
