@@ -43,7 +43,7 @@ function tick() {
     timeToGiftCreation=Math.floor(new Date().getTime()/1000)%60;
     //console.log(timeToGiftCreation);
     if(!gameOver) {
-        if (player.lives < 0) {
+        if (player.lives === 0) {
             console.log('You died!');
             gameOver = true;
         }
@@ -147,16 +147,12 @@ function tick() {
             bullet1.movement.right = true;
             bullet2.movement.right = true;
         }
-        //death of the rabbit
-        if(bullet1.boundingBox.intersects(player.boundingBox)){
-            player.movement.dead = true;
-        }
 
         background.update();
         roadRunner.update();
         player.update();
-        bullet2.update();
         bullet1.update();
+        bullet2.update();
         yosemity.update();
         fallingBonus.update();
         fallingPresent.update();
@@ -175,8 +171,8 @@ function render(ctx) {
     player.render(ctx);
     spike1.render(ctx);
     spike2.render(ctx);
-    bullet2.render(ctx);
     bullet1.render(ctx);
+    bullet2.render(ctx);
     yosemity.render(ctx);
     fallingBonus.render(ctx);
     fallingPresent.render(ctx);
@@ -209,6 +205,8 @@ function drawBoundingBoxes() {
 
     ctx.rect(spike1.boundingBox.x, spike1.boundingBox.y, spike1.boundingBox.width, spike1.boundingBox.height);
     ctx.rect(spike2.boundingBox.x, spike2.boundingBox.y, spike2.boundingBox.width, spike2.boundingBox.height);
+    ctx.rect(bullet1.boundingBox.x, bullet1.boundingBox.y, bullet1.boundingBox.width, bullet1.boundingBox.height);
+    ctx.rect(bullet2.boundingBox.x, bullet2.boundingBox.y, bullet2.boundingBox.width, bullet2.boundingBox.height);
     ctx.rect(player.boundingBox.x, player.boundingBox.y, player.boundingBox.width, player.boundingBox.height);
     ctx.rect(fallingBonus.boundingBox.x, fallingBonus.boundingBox.y, fallingBonus.boundingBox.width, fallingBonus.boundingBox.height);
     ctx.rect(fallingPresent.boundingBox.x, fallingPresent.boundingBox.y, fallingPresent.boundingBox.width, fallingPresent.boundingBox.height);

@@ -5,7 +5,7 @@ var Bullet = (function() {
             left: false,
             right: false
         };
-        this.velocity = -10;
+        this.velocity = -5;
         this.width = 20;
         this.height = 27;
         this.animation = new Animation (

@@ -99,7 +99,7 @@ var Yosemity = (function() {
         this.movement = {
            left: true
         };
-        this.velocity = -5;
+        this.velocity = -2.5;
         this.width = 77.5;
         this.height = 60;
         this.animation = new Animation(
