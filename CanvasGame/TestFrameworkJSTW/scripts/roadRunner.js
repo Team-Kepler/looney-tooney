@@ -44,7 +44,7 @@ var RoadRunner = (function() {
 
 
     RoadRunner.prototype.render = function(ctx) {
-        if(this.movement.left===true){
+        if(this.movement.left === true){
             this.animation.setRow(0);
         }
         this.animation.draw(ctx);

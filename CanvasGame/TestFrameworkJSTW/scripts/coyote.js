@@ -33,11 +33,16 @@ var Coyote = (function() {
     Coyote.prototype.update = function() {
         if (this.movement.left) {
             this.position.x -= this.velocityX;
-            if(this.position.x <= -100) {
+            if(this.position.x <= -400) {
                 this.movement.left = false;
+                this.movement.right = true;
             }
-        } else if(!this.movement.left) {
-            this.position.x += this.velocityX;
+        } else if(this.movement.right) {
+            if(this.position.x < 1200) {
+                this.position.x += this.velocityX;
+            } else {
+                this.movement.right = false;
+            }
         }
 
         this.animation.position.set(this.position.x, this.position.y);

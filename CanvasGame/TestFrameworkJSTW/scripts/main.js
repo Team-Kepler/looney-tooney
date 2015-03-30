@@ -34,8 +34,8 @@ var yosemity = new Yosemity(900, 500),
 
 var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50),
     fallingPresent = new FallingPresent(getRandomInt(20, 950), 100),
-    roadRunner = new RoadRunner(1000, 475),
-    coyote = new Coyote(1000, 475),
+    roadRunner = new RoadRunner(1200, 475),
+    coyote = new Coyote(1300, 475),
     timerMinutes = 0, 
     timerSeconds = 0,
     timerCurrentValue = 0,
@@ -158,6 +158,8 @@ function tick() {
         if(fallingPresent.position.y >= 580){
             if(timeToGiftCreation === 0) {
                 fallingPresent = new FallingPresent(getRandomInt(20, 950), 10);
+                roadRunner = new RoadRunner(1200, 475);
+                coyote = new Coyote(1220, 475);
             }
         }
 
