@@ -6,7 +6,7 @@ var Coyote = (function() {
             right:false
         };
 
-        this.velocityX = 5;
+        this.velocityX = 6;
 
         this.width = 85;
         this.height = 85;
@@ -33,11 +33,11 @@ var Coyote = (function() {
     Coyote.prototype.update = function() {
         if (this.movement.left) {
             this.position.x -= this.velocityX;
-            if(this.position.x<=-100){
-                this.movement.left=false;
+            if(this.position.x <= -100) {
+                this.movement.left = false;
             }
-        }else if(!this.movement.left){
-            this.position.x+=this.velocityX;
+        } else if(!this.movement.left) {
+            this.position.x += this.velocityX;
         }
 
         this.animation.position.set(this.position.x, this.position.y);
@@ -49,9 +49,9 @@ var Coyote = (function() {
 
 
     Coyote.prototype.render = function(ctx) {
-        if(this.movement.left===true){
+        if(this.movement.left === true) {
             this.animation.setRow(1);
-        }else if(!this.movement.left){
+        } else if (!this.movement.left) {
             this.animation.setRow(2);
         }
         this.animation.draw(ctx);

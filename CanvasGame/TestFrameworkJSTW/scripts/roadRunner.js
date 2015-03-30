@@ -6,7 +6,7 @@ var RoadRunner = (function() {
             right:false
         };
 
-        this.velocityX = 5;
+        this.velocityX = 6;
 
         this.width = 85;
         this.height = 85;

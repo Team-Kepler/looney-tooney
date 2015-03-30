@@ -13,9 +13,9 @@ var background = new Background();
 
 var player = new Player(100, 475);
 
-var spike1;
-var spike2;
-var newSpike;
+var spike1,
+    spike2,
+    newSpike;
 do {
     newSpike = new Spike(getRandomInt(50, 900), 480);
 } while (newSpike.intersects(player));
@@ -28,17 +28,22 @@ do {
 
 spike2 = newSpike;
 
-var yosemity = new Yosemity(900, 500);
-var bullet1 = new Bullet(1120, 520);
-var bullet2 = new Bullet(1120, 510);
+var yosemity = new Yosemity(900, 500),
+    bullet1 = new Bullet(1120, 520),
+    bullet2 = new Bullet(1120, 510);
 
-var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50);
-var fallingPresent = new FallingPresent(getRandomInt(20, 950), 100);
-var timer = 0;
-var gameOver = false;
-var timeToGiftCreation = 0;
-var roadRunner = new RoadRunner(1200, 475);
-var coyote = new Coyote(1200, 475);
+var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50),
+    fallingPresent = new FallingPresent(getRandomInt(20, 950), 100),
+    roadRunner = new RoadRunner(1000, 475),
+    coyote = new Coyote(1000, 475),
+    timerMinutes = 0, 
+    timerSeconds = 0,
+    timerCurrentValue = 0,
+    timerLastValue = -1,
+    timerPad = '00',
+    timeToGiftCreation = 0,
+    gameOver = false;
+    
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 2)) + min;
@@ -53,10 +58,26 @@ function update() {
 function tick() {
     timeToGiftCreation = Math.floor(new Date().getTime()/1000)%60;
     //console.log(timeToGiftCreation);
+    
     if(!gameOver) {
         if (player.lives === 0 || player.score >= 50) {
             gameOver = true;
         }
+
+        timerCurrentValue = Math.floor(new Date().getTime()/1000)%60;
+        if (timerCurrentValue === 0) {
+            timerLastValue = -1;
+        }
+        if(timerCurrentValue > timerLastValue) {
+            timerLastValue = timerCurrentValue;
+            timerSeconds++;
+
+            if (timerSeconds === 60) {
+                timerSeconds = 0;
+                timerMinutes++;
+            }
+        }
+
 
         if (!player.movement.down) {
             player.movement.right = false;
@@ -122,9 +143,8 @@ function tick() {
                 player.score++;
             }
             fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
-        }
 
-        else if(fallingBonus.position.y >= 580){
+        } else if(fallingBonus.position.y >= 580){
             fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
         }
 
@@ -183,17 +203,16 @@ function render(ctx) {
 
 
     background.render(ctx);
-    roadRunner.render(ctx);
-    coyote.render(ctx);
     player.render(ctx);
+    yosemity.render(ctx);
     spike1.render(ctx);
     spike2.render(ctx);
-    bullet1.render(ctx);
-    bullet2.render(ctx);
-    yosemity.render(ctx);
     fallingBonus.render(ctx);
     fallingPresent.render(ctx);
-
+    bullet1.render(ctx);
+    bullet2.render(ctx);
+    roadRunner.render(ctx);
+    coyote.render(ctx);
 
 
     //drawBoundingBoxes();
@@ -201,10 +220,9 @@ function render(ctx) {
     ctx.font = "40px Berkshire Swash, cursive";
     ctx.fillStyle = "pink";
 
-
-    ctx.fillText("Scores: " + player.score + "/50", 250, 50);
-    ctx.fillText("Timer: " + timer, 490, 50);
-    ctx.fillText("Lives: " + player.lives, 700, 50);
+    ctx.fillText("Scores: " + player.score + "/50", 200, 50);
+    ctx.fillText("Timer: " + (timerPad + timerMinutes).slice(-2) + ":" + (timerPad + timerSeconds).slice(-2), 440, 50);
+    ctx.fillText("Lives: " + player.lives, 690, 50);
 
 
     if(gameOver) {
