@@ -8,7 +8,6 @@ var Player = (function() {
             jump: false,
             spin: false,
             signUp: false,
-            dead: false,
             idle: true
         };
 
@@ -17,6 +16,10 @@ var Player = (function() {
         this.canJump = true;
         this.jumpDuration = 11;
         this.jumpValue = 0;
+
+        this.isDying = false;
+        this.deathDuration = 20;
+        this.deathValue = 0;
 
         this.velocityX = 4;
         this.velocityY = 8;
@@ -85,79 +88,83 @@ var Player = (function() {
             this.animation = this.animationLib.taz;
         }
 
-        if (!this.movement.spin) {
-            if(this.movement.right) {
-                if(!this.intersectsRight(spike1) && !this.intersectsRight(spike2)) {
-                    this.position.x += this.velocityX;
-                }
-            }
-            else if(this.movement.left) {
-                if(!this.intersectsLeft(spike1) && !this.intersectsLeft(spike2)) {
-                    this.position.x -= this.velocityX;
-                }
-            }
+        if (!this.isDying) {
+	        if (!this.movement.spin) {
+	            if(this.movement.right) {
+	                if(!this.intersectsRight(spike1) && !this.intersectsRight(spike2)) {
+	                    this.position.x += this.velocityX;
+	                }
+	            }
+	            else if(this.movement.left) {
+	                if(!this.intersectsLeft(spike1) && !this.intersectsLeft(spike2)) {
+	                    this.position.x -= this.velocityX;
+	                }
+	            }
+
+	        } else {
+	            if(this.movement.right) {
+	                this.position.x += this.velocityX * 2;
+	            }
+	            else if(this.movement.left) {
+	                 this.position.x -= this.velocityX * 2;
+	            }
+
+	        }
+
+	        if((this.movement.jump || this.jumpValue > 0) && this.canJump) {  
+	        	this.movement.down = false;
+	        	if (this.jumpValue <= this.jumpDuration) {	
+		            this.position.y -= this.velocityY;
+		            this.jumpValue++;
+		        } else {
+		        	this.canJump = false;
+		        	this.movement.jump = false;
+		        	this.movement.down = true;
+		        }
+	        } else if(this.movement.down) {
+	        	if(this.position.y <= ground) {
+	            	this.position.y += this.velocityY / 2;
+	        	} else { 
+	        		this.movement.jump = false;
+	        		this.movement.down = false;
+	        		this.canJump = true;
+	        		this.jumpValue = 0;
+	        	}
+
+	            if (this.immuneValue > 0) {
+	                this.immuneValue++;
+	                if(this.immuneValue === this.immuneDuration) {
+	                    this.immuneValue = 0;
+	                }
+	            }
+
+	            if (this.intersects(spike1) || this.intersects(spike2)) {
+	                if (this.immuneValue === 0) {
+	                    this.lives--;
+	                    this.immuneValue++;
+	                    
+	                    if(this.lives >= 0) {
+	                        this.position.x = 100;
+	                        this.position.y = 460;
+	                    }
+	                }            
+	            }
+
+	        } 
 
         } else {
-            if(this.movement.right) {
-                this.position.x += this.velocityX * 2;
-            }
-            else if(this.movement.left) {
-                 this.position.x -= this.velocityX * 2;
-            }
-
-        }
-
-        if((this.movement.jump || this.jumpValue > 0) && this.canJump) {  
-        	this.movement.down = false;
-        	if (this.jumpValue <= this.jumpDuration) {	
-	            this.position.y -= this.velocityY;
-	            this.jumpValue++;
-	        } else {
-	        	this.canJump = false;
-	        	this.movement.jump = false;
-	        	this.movement.down = true;
-	        }
-        }
-        else if(this.movement.down) {
-        	if(this.position.y <= ground) {
-            	this.position.y += this.velocityY / 2;
-        	} else { 
-        		this.movement.jump = false;
-        		this.movement.down = false;
-        		this.canJump = true;
-        		this.jumpValue = 0;
+        	this.deathValue++;
+        	if (this.deathValue === this.deathDuration) {
+        		this.deathValue = 0;
+        		this.isDying = false;
         	}
-
-            if (this.immuneValue > 0) {
-                this.immuneValue++;
-                if(this.immuneValue === this.immuneDuration) {
-                    this.immuneValue = 0;
-                }
-            }
-
-            if (this.intersects(spike1) || this.intersects(spike2)) {
-                if (this.immuneValue === 0) {
-                    this.lives--;
-                    this.immuneValue++;
-                    
-                    if(this.lives >= 0) {
-                        this.position.x = 100;
-                        this.position.y = 460;
-                    }
-                }            
-            }
-
-        } 
+        }
 
         this.animation.position.set(this.position.x, this.position.y);
         this.boundingBox.x = this.position.x + (this.width / 2.5);
         this.boundingBox.y = this.position.y + (this.height / 4);
 
-        if(this.movement.jump) {
-        	this.animation.update();
-        } else {
-        	this.animation.update();
-        }
+        this.animation.update();
     };
 
 
@@ -188,11 +195,10 @@ var Player = (function() {
 
         }
         //dead
-        else if(this.movement.dead){
+        else if(this.isDying){
             this.animation.setLimit(4);
             this.animation.setRow(5);
-        }
-        else {
+        } else {
             this.animation.setLimit(4);
             this.animation.setRow(0);
         }

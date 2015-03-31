@@ -197,6 +197,7 @@ function tick() {
         	bullet1 = new Bullet(1120, 520);
         	bullet2 = new Bullet(1120, 510);
         	player.lives--;
+        	player.isDying = true;
         }
 
         background.update();
