@@ -257,9 +257,9 @@ function render(ctx) {
         ctx.font = "35px Berkshire Swash, cursive";
         
         if(player.score >= 50) {
-            ctx.fillText('YOU WON!', 480, 300);
+            ctx.fillText('YOU WIN!', 480, 300);
         } else {
-            ctx.fillText('YOU LOST!', 480, 300);
+            ctx.fillText('YOU LOSE!', 480, 300);
         }
 
         audio.muted = true;
