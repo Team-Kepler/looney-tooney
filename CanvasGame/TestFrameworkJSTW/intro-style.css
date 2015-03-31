@@ -1,0 +1,86 @@
+@font-face {
+    font-family: fontsz;
+    src: url('fonts/LMS_Lance_s_Letter_Blocks.ttf');
+}
+h1 {
+    font-family: 'fontsz';
+    font-size: 50px;
+    color: black;
+}
+
+video.hubble{
+    min-width: 100%;
+    min-height: 100%;
+    width: 1000px;
+    height: 500px;
+}
+
+.colors-rotate-moving {   
+   text-align: center; 
+   width: 355px;
+   height: 180px;   
+   position: absolute;
+   top: 0px;
+   left: 11120px;
+   -webkit-animation: Hypnoza 10s both; /* Chrome, Safari, Opera */
+   animation: Hypnoza 5s both;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes Hypnoza {
+    0% {
+       
+        left: -11000px;
+        top: 480px;       
+    }
+
+    25% {      
+        left: 58%;
+        top: 480px;       
+    }
+
+    50% {    
+        left: 58%;
+        top: 480px;    
+    }
+
+    75% {    
+        left: 170px;
+        top: 480px;         
+    }
+
+    100% {    
+        left: 455px;
+        top: 480px;     
+    }
+}
+
+
+/* Firefox */
+@keyframes Hypnoza {
+    from {
+       
+        left: -11000px;
+        top: 480px;       
+    }
+
+    25% {      
+        left: 58%;
+        top: 480px;       
+    }
+
+    50% {    
+        left: 58%;
+        top: 480px;    
+    }
+
+    75% {    
+        left: 170px;
+        top: 480px;         
+    }
+
+    100% {    
+        left: 455px;
+        top: 480px;     
+    }
+}
