@@ -2,6 +2,20 @@
     font-family: fontsz;
     src: url('fonts/LMS_Lance_s_Letter_Blocks.ttf');
 }
+
+body {
+    background: #555;
+}
+
+#container {
+    width: 1100px;
+    margin: 25px auto;
+}
+
+#content {
+    border: #999 3px solid;
+}
+
 h1 {
     font-family: 'fontsz';
     font-size: 50px;
@@ -78,27 +92,27 @@ video.hubble{
     0% {
        
         left: -11000px;
-        top: 480px;       
+        top: 520px;
     }
 
     25% {      
         left: 58%;
-        top: 480px;       
+        top: 520px;
     }
 
     50% {    
         left: 58%;
-        top: 480px;    
+        top: 520px;
     }
 
     75% {    
         left: 170px;
-        top: 480px;         
+        top: 520px;
     }
 
     100% {    
         left: 455px;
-        top: 480px;     
+        top: 520px;
     }
 }
 

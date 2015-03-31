@@ -45,7 +45,7 @@ var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50),
     fallingPresent = new FallingPresent(getRandomInt(20, 950), 100),
     roadRunner = new RoadRunner(1200, 450),
     coyote = new Coyote(1300, 450),
-    timerMinutes = 0, 
+    timerMinutes = 0,
     timerSeconds = 0,
     timerCurrentValue = 0,
     timerLastValue = -1,
@@ -69,7 +69,7 @@ function tick() {
     timeToGiftCreation = Math.floor(new Date().getTime()/1000)%60;
     
     if(!gameOver) {
-        if (player.lives === 0 || player.score >= 50) {
+        if (player.lives === 0 || player.score >= 50 || timerMinutes >= 3) {
             gameOver = true;
         }
 
