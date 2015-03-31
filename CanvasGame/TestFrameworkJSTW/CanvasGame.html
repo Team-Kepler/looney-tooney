@@ -13,7 +13,11 @@
 		<canvas id="canvas" width="1100" height="600"></canvas>
         <audio id="audio" src="audio.mp3" autoplay></audio>
 	</div>
-    <div><input type="button" value="Restart Game" onclick="window.location.reload()"/></div>
+    <div>
+        <input type="button" value="Restart Game" onclick="window.location.reload()"/>
+        <button onclick="enableMute()" type="button">Mute sound</button>
+        <button onclick="disableMute()" type="button">Enable sound</button>
+    </div>
 	<script src="scripts/background.js"></script>
 	<script src="scripts/roadRunner.js"></script>
     <script src="scripts/coyote.js"></script>

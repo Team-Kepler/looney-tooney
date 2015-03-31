@@ -1,6 +1,14 @@
-audio = document.getElementById("audio");
+var audio = document.getElementById("audio");
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
+
+function enableMute() {
+    audio.muted = true;
+}
+
+function disableMute() {
+    audio.muted = false;
+}
 
 var input = new Input();
 attachListeners(input);
