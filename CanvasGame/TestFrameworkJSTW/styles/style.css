@@ -1,3 +1,7 @@
+@font-face{
+    font-family:Berkshire Swash;
+    src:url('http://fonts.googleapis.com/css?family=Berkshire+Swash&subset=latin,latin-ext');
+}
 body {
 background: #333;
 }
@@ -11,4 +15,13 @@ margin: 25px auto;
 border: #999 3px solid;
 }
 
+button, input[type='button']{
+    background-color:#6D493B;
+    border:none;
+    font-family:'Berkshire Swash';
+    font-size:15px;
+    margin-right:52px;
+    height:20px;
+    color:pink;
+}
 
