@@ -11,25 +11,26 @@
 	<div id="canvas-container">
 		<canvas id="canvas" width="1100" height="600"></canvas>
         <audio id="audio" src="audio.mp3" autoplay></audio>
+
+        <aside id="legend">
+            <h2>Controls</h2>
+            <h4>Moving:</h4>
+            <p>left:  a or left arrow</p>
+            <p>right: d or right arrow</p>
+            <p>jump:  space</p>
+            <h4>Player change:</h4>
+            <p>Bugs:  o</p>
+            <p>Daffy: i</p>
+            <p>Taz:   p</p>
+            <div id="controls">
+                <input type="button" value="Restart Game" onclick="window.location.reload()"/>
+                <button onclick="enableMute()" type="button">Mute sound</button>
+                <button onclick="disableMute()" type="button">Enable sound</button>
+                <button onclick="document.getElementById('audio').volume += 0.1">Vol+ </button>
+                <button onclick="document.getElementById('audio').volume -= 0.1">Vol- </button>
+            </div>
+        </aside>
 	</div>
-    <aside id="legend">
-        <h2>Controls</h2>
-        <h4>Moving:</h4>
-        <p>left:  a or left arrow</p>
-        <p>right: d or right arrow</p>
-        <p>jump:  space</p>
-        <h4>Player change:</h4>
-        <p>Bugs:  o</p>
-        <p>Daffy: i</p>
-        <p>Taz:   p</p>
-    </aside>
-    <div id="controls">
-        <input type="button" value="Restart Game" onclick="window.location.reload()"/>
-        <button onclick="enableMute()" type="button">Mute sound</button>
-        <button onclick="disableMute()" type="button">Enable sound</button>
-        <button onclick="document.getElementById('audio').volume += 0.1">Vol+ </button>
-        <button onclick="document.getElementById('audio').volume -= 0.1">Vol- </button>
-    </div>
 
 	<script src="scripts/background.js"></script>
 	<script src="scripts/roadRunner.js"></script>
