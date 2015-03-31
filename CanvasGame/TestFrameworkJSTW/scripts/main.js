@@ -220,6 +220,8 @@ function render(ctx) {
 
 
     background.render(ctx);
+    roadRunner.render(ctx);
+    coyote.render(ctx);
     player.render(ctx);
     spike1.render(ctx);
     spike2.render(ctx);
@@ -228,8 +230,6 @@ function render(ctx) {
     fallingPresent.render(ctx);
     bullet1.render(ctx);
     bullet2.render(ctx);
-    roadRunner.render(ctx);
-    coyote.render(ctx);
 
 
     //drawBoundingBoxes();
