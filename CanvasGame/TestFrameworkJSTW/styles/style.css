@@ -1,47 +1,66 @@
-@font-face{
-    font-family:Berkshire Swash;
-    src:url('http://fonts.googleapis.com/css?family=Berkshire+Swash&subset=latin,latin-ext');
-}
-body {
-background: #333;
+@font-face {
+    font-family: Berkshire Swash;
+
+    src: url('http://fonts.googleapis.com/css?family=Berkshire+Swash&subset=latin,latin-ext');
 }
 
-#canvas-container {
-width: 1260px;
+body
+{
+    background: #333;
 }
 
-#canvas {
-border: #999 3px solid;
-float: left;
+#canvas-container
+{
+    width: 1260px;
+    margin: 0 auto;
 }
 
-#legend {
+#canvas
+{
+    float: left;
+
+    border: #999 3px solid;
+}
+
+#legend
+{
     float: right;
+
     width: 140px;
 }
 
-h2, h4, p {
+h2,
+h4,
+p
+{
     color: pink;
 }
 
-#controls {
-    padding: 5px;
+#controls
+{
     display: block;
+
+    padding: 5px;
 }
 
-button, input[type='button']{
-    background-color:#6D493B;
-    border:none;
-    font-family:'Berkshire Swash';
-    font-size:15px;
+button,
+input[type='button']
+{
+    font-family: 'Berkshire Swash';
+    font-size: 15px;
+
+    height: 25px;
     margin: 0 auto;
     margin-bottom: 10px;
     padding: 5px;
-    height:25px;
-    color:pink;
+
+    color: pink;
+    border: none;
+    background-color: #6d493b;
 }
 
-button:hover, input:hover {
+button:hover,
+input:hover
+{
     cursor: pointer;
 }
-
