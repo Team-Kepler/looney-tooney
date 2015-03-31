@@ -6,14 +6,13 @@ body {
 background: #333;
 }
 
-.canvas_container {
-width: 1100px;
-margin: 25px auto;
+#canvas-container {
+width: 1260px;
 }
 
 #canvas {
 border: #999 3px solid;
-    float: left;
+float: left;
 }
 
 #legend {
@@ -26,7 +25,6 @@ h2, h4, p {
 }
 
 #controls {
-    margin: 5px;
     padding: 5px;
     display: block;
 }
