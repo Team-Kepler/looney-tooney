@@ -260,6 +260,8 @@ function render(ctx) {
         } else {
             ctx.fillText('YOU LOST!', 480, 300);
         }
+
+        audio.muted = true;
     }
 }
 
