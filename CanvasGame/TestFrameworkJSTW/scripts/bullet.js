@@ -33,7 +33,6 @@ var Bullet = (function() {
             this.position.x += this.velocity;
             if (this.position.x <= -100) {
                 this.movement.left = false;
-                //this.movement.right = false;
             }
         }
         else if (this.movement.right) {

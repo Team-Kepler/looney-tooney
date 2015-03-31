@@ -58,7 +58,6 @@ function update() {
 
 function tick() {
     timeToGiftCreation = Math.floor(new Date().getTime()/1000)%60;
-    //console.log(timeToGiftCreation);
     
     if(!gameOver) {
         if (player.lives === 0 || player.score >= 50) {
@@ -66,7 +65,6 @@ function tick() {
         }
 
         timerCurrentValue = Math.floor(new Date().getTime()/1000)%60;
-        //console.log(timerCurrentValue);
 
         if (timerCurrentValue === 0 && !timerLockZero) {
             timerLastValue = -1;
@@ -95,7 +93,7 @@ function tick() {
         }
 
         if(input.d || input.right) {
-            if(player.position.x < 1100) {
+            if(player.position.x < 1020) {
                 player.movement.right = true;
                 player.movement.left = false;
                 player.movement.idle = false;
