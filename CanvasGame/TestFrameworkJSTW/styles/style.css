@@ -13,6 +13,21 @@ margin: 25px auto;
 
 #canvas {
 border: #999 3px solid;
+    float: left;
+}
+
+#legend {
+    float: right;
+}
+
+h2, h4, p {
+    color: pink;
+}
+
+#controls {
+    margin: 5px;
+    padding: 5px;
+    display: block;
 }
 
 button, input[type='button']{
@@ -20,8 +35,14 @@ button, input[type='button']{
     border:none;
     font-family:'Berkshire Swash';
     font-size:15px;
-    margin-right:52px;
-    height:20px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    padding: 5px;
+    height:25px;
     color:pink;
+}
+
+button:hover, input:hover {
+    cursor: pointer;
 }
 
