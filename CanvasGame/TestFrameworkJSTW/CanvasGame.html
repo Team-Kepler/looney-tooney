@@ -13,21 +13,26 @@
         <audio id="audio" src="sounds/audio.mp3" autoplay></audio>
 
         <aside id="legend">
-            <h2>Controls</h2>
-            <h4>Moving:</h4>
-            <p>left:  a or left arrow</p>
-            <p>right: d or right arrow</p>
-            <p>jump:  space</p>
-            <h4>Player change:</h4>
-            <p>Bugs:  o</p>
-            <p>Daffy: i</p>
-            <p>Taz:   p</p>
-            <div id="controls">
-                <input type="button" value="Restart Game" onclick="window.location.reload()"/>
-                <button onclick="enableMute()" type="button">Mute sound</button>
-                <button onclick="disableMute()" type="button">Enable sound</button>
-                <button onclick="document.getElementById('audio').volume += 0.1">Vol+ </button>
-                <button onclick="document.getElementById('audio').volume -= 0.1">Vol- </button>
+           <header>
+               <h1>LOONEY</h1>
+               <h2>TUNEY</h2>
+               <h3>GAME</h3>
+           </header>
+            <h2 id="controls-title">Controls</h2>
+            <h4 class="controls-list">Moving:</h4>
+            <p class="controls-list">left: A or &leftarrow;</p>
+            <p class="controls-list">right: D or &rightarrow;</p>
+            <p class="controls-list">jump/spin: SPACE</p>
+            <h4 class="controls">Player change:</h4>
+            <p class="controls-list">Bugs:  O</p>
+            <p class="controls-list">Daffy: I</p>
+            <p class="controls-list">Taz:   P</p>
+            <div id="controls-list">
+                <input type="button" value="Restart Game" onclick="reloadGame()"/>
+               <div id="music"> <label for="sound">Mute</label>
+                <input type="checkbox" id="sound" name="sound" onclick="enableSound()"/></div>
+                <button onclick="increaseVolume()">Vol+ </button>
+                <button onclick="decreaseVolume()">Vol- </button>
             </div>
         </aside>
 	</div>
@@ -42,5 +47,6 @@
 	<script src="scripts/fallingBonus.js"></script>
 	<script src="scripts/fallingPresent.js"></script>
 	<script src="scripts/main.js"></script>
+	<script src="scripts/controls.js"></script>
 </body>
 </html>

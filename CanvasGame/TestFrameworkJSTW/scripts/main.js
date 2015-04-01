@@ -32,8 +32,8 @@ spike1 = newSpike;
 
 do {
     newSpike = new Spike(getRandomInt(50, 900), 480);
-} while (newSpike.intersectsLeft(spike1) || newSpike.intersectsRight(spike1) || 
-        newSpike.intersectsLeft(player) || newSpike.intersectsRight(player));
+} while (newSpike.intersectsLeft(spike1) || newSpike.intersectsRight(spike1) ||
+newSpike.intersectsLeft(player) || newSpike.intersectsRight(player));
 
 spike2 = newSpike;
 
@@ -53,7 +53,7 @@ var fallingBonus = new FallingBonus(getRandomInt(20, 950), 50),
     timerPad = '00',
     timeToGiftCreation = 0,
     gameOver = false;
-    
+
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 2)) + min;
@@ -66,14 +66,14 @@ function update() {
 }
 
 function tick() {
-    timeToGiftCreation = Math.floor(new Date().getTime()/1000)%60;
-    
-    if(!gameOver) {
+    timeToGiftCreation = Math.floor(new Date().getTime() / 1000) % 60;
+
+    if (!gameOver) {
         if (player.lives === 0 || player.score >= 50 || timerMinutes >= 3) {
             gameOver = true;
         }
 
-        timerCurrentValue = Math.floor(new Date().getTime()/1000)%60;
+        timerCurrentValue = Math.floor(new Date().getTime() / 1000) % 60;
 
         if (timerCurrentValue === 0 && !timerLockZero) {
             timerLastValue = -1;
@@ -101,26 +101,26 @@ function tick() {
             player.movement.idle = true;
         }
 
-        if(input.d || input.right) {
-            if(player.position.x < 1020) {
+        if (input.d || input.right) {
+            if (player.position.x < 1020) {
                 player.movement.right = true;
                 player.movement.left = false;
                 player.movement.idle = false;
                 background.position.x -= 3;
             }
 
-        } else if(input.a || input.left) {
-            if(player.position.x >= 0) {
+        } else if (input.a || input.left) {
+            if (player.position.x >= 0) {
                 player.movement.right = false;
                 player.movement.left = true;
                 player.movement.idle = false;
                 background.position.x += 3;
             }
 
-        } 
+        }
 
-        if(input.space) {
-            if(player.character === 'bugs') {
+        if (input.space) {
+            if (player.character === 'bugs') {
                 player.movement.jump = true;
                 player.movement.idle = false;
             }
@@ -128,20 +128,20 @@ function tick() {
                 player.movement.spin = true;
                 player.movement.idle = false;
 
-                if(player.intersects(spike1)){
+                if (player.intersects(spike1)) {
                     do {
                         newSpike = new Spike(getRandomInt(50, 900), 480);
                     }
                     while (newSpike.intersectsRight(spike2) || newSpike.intersectsLeft(spike2));
-                   
+
                     spike1 = newSpike;
 
-                } else if(player.intersects(spike2)) {
+                } else if (player.intersects(spike2)) {
 
                     do {
                         newSpike = new Spike(getRandomInt(50, 900), 480);
                     } while (newSpike.intersectsRight(spike1) || newSpike.intersectsLeft(spike1));
-                   
+
                     spike2 = newSpike;
                 }
             } else if (player.character === 'daffy') {
@@ -150,27 +150,27 @@ function tick() {
             }
         }
 
-        if(player.intersects(fallingBonus) && player.character !== 'taz') {
-            if(player.character==='daffy'){
+        if (player.intersects(fallingBonus) && player.character !== 'taz') {
+            if (player.character === 'daffy') {
                 player.score += 5;
             } else {
                 player.score++;
             }
-            fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
+            fallingBonus = new FallingBonus(getRandomInt(20, 950), 10);
 
-        } else if(fallingBonus.position.y >= 580){
-            fallingBonus = new FallingBonus(getRandomInt(20,950), 10);
+        } else if (fallingBonus.position.y >= 580) {
+            fallingBonus = new FallingBonus(getRandomInt(20, 950), 10);
         }
 
-        if(player.intersects(fallingPresent)){
+        if (player.intersects(fallingPresent)) {
             player.lives++;
             roadRunner.movement.left = true;
             coyote.movement.left = true;
             fallingPresent = new FallingPresent(1200, 10);
         }
 
-        if(fallingPresent.position.y >= 580){
-            if(timeToGiftCreation === 0) {
+        if (fallingPresent.position.y >= 580) {
+            if (timeToGiftCreation === 0) {
                 fallingPresent = new FallingPresent(getRandomInt(20, 950), 10);
                 roadRunner = new RoadRunner(1200, 455);
                 coyote = new Coyote(1300, 455);
@@ -178,26 +178,26 @@ function tick() {
         }
 
         //Yosemity shooting
-        if(yosemity.position.x >= 1001 && yosemity.position.x <= 1050  && yosemity.movement.left) {
-            
+        if (yosemity.position.x >= 1001 && yosemity.position.x <= 1050 && yosemity.movement.left) {
+
             bullet1 = new Bullet(yosemity.position.x - 10, 520);
             bullet2 = new Bullet(yosemity.position.x - 10, 510);
             bullet1.movement.left = true;
             bullet2.movement.left = true;
 
-        } else if(yosemity.position.x >= 0 && yosemity.position.x <= 10 && !yosemity.movement.left){
-            
+        } else if (yosemity.position.x >= 0 && yosemity.position.x <= 10 && !yosemity.movement.left) {
+
             bullet1 = new Bullet(yosemity.position.x + 40, 520);
             bullet2 = new Bullet(yosemity.position.x + 40, 510);
             bullet1.movement.right = true;
             bullet2.movement.right = true;
         }
 
-        if(player.intersects(bullet1) || player.intersects(bullet2)) {
-        	bullet1 = new Bullet(1120, 520);
-        	bullet2 = new Bullet(1120, 510);
-        	player.lives--;
-        	player.isDying = true;
+        if (player.intersects(bullet1) || player.intersects(bullet2)) {
+            bullet1 = new Bullet(1120, 520);
+            bullet2 = new Bullet(1120, 510);
+            player.lives--;
+            player.isDying = true;
         }
 
         background.update();
@@ -242,7 +242,7 @@ function render(ctx) {
     ctx.fillText("Lives: " + player.lives, 690, 50);
 
 
-    if(gameOver) {
+    if (gameOver) {
         ctx.fillStyle = '#6D493B';
         ctx.rect(420, 150, 300, 200);
         ctx.fill();
@@ -255,11 +255,11 @@ function render(ctx) {
         ctx.font = "40px Berkshire Swash, cursive";
         ctx.fillText('Game Over', 480, 220);
         ctx.font = "35px Berkshire Swash, cursive";
-        
-        if(player.score >= 50) {
-            ctx.fillText('YOU WIN!', 480, 300);
+
+        if (player.score >= 50) {
+            ctx.fillText('YOU WON!', 480, 300);
         } else {
-            ctx.fillText('YOU LOSE!', 480, 300);
+            ctx.fillText('YOU LOST!', 480, 300);
         }
 
         audio.muted = true;

@@ -1,66 +1,94 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 @font-face {
     font-family: Berkshire Swash;
-
     src: url('http://fonts.googleapis.com/css?family=Berkshire+Swash&subset=latin,latin-ext');
 }
 
-body
-{
+body {
     background: #333;
 }
 
-#canvas-container
-{
+#canvas-container {
     width: 1260px;
     margin: 0 auto;
 }
 
-#canvas
-{
+#canvas {
     float: left;
-
     border: #999 3px solid;
 }
 
-#legend
-{
+#legend {
     float: right;
-
     width: 140px;
 }
 
-h2,
+#controls-title,
 h4,
-p
-{
+p {
     color: pink;
 }
 
-#controls
-{
-    display: block;
+h4 {
+    font-family: 'Berkshire Swash';
+}
 
-    padding: 5px;
+#controls-title {
+    margin-top: 10px;
+}
+
+aside > header {
+    color: pink;
+    font-family: 'Berkshire Swash';
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.controls-list {
+    margin: 10px 0;
 }
 
 button,
-input[type='button']
-{
+input[type='button'] {
     font-family: 'Berkshire Swash';
     font-size: 15px;
-
-    height: 25px;
-    margin: 0 auto;
-    margin-bottom: 10px;
-    padding: 5px;
-
+    padding: 10px;
     color: pink;
     border: none;
     background-color: #6d493b;
 }
 
+button {
+    margin-right: 5px;
+}
+
 button:hover,
-input:hover
-{
+input:hover {
     cursor: pointer;
+}
+
+div#music {
+    font-family: 'Berkshire Swash';
+    font-size: 15px;
+    width: 62%;
+    margin: 10px 0 10px 0;
+    color: pink;
+    border: none;
+    background-color: #6d493b;
+    padding: 10px;
+}
+
+label {
+    float: left;
+    padding-top: 5px;
+}
+
+input[type='checkbox'] {
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
 }
