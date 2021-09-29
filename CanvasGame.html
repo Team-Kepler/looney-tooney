@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Canvas Game</title>
+    <link href='http://fonts.googleapis.com/css?family=Berkshire+Swash&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="scripts/framework.js" type="text/javascript"></script>
+</head>
+<body>
+	<div id="canvas-container">
+		<canvas id="canvas" width="1100" height="600"></canvas>
+        <audio id="audio" src="sounds/audio.mp3" autoplay></audio>
+
+        <aside id="legend">
+           <header>
+               <h1>LOONEY</h1>
+               <h2>TOONEY</h2>
+               <h3>GAME</h3>
+           </header>
+            <h2 id="controls-title">Controls</h2>
+            <h4 class="controls-list">Moving:</h4>
+            <p class="controls-list">Left: A or &leftarrow;</p>
+            <p class="controls-list">Right: D or &rightarrow;</p>
+            <p class="controls-list">Jump/Spin: SPACE</p>
+            <h4 class="controls">Player change:</h4>
+            <p class="controls-list">Bugs:  O</p>
+            <p class="controls-list">Daffy: I</p>
+            <p class="controls-list">Taz:   P</p>
+            <div id="controls-list">
+                <input type="button" value="Restart Game" onclick="reloadGame()"/>
+               <div id="music"> <label for="sound">Mute</label>
+                <input type="checkbox" id="sound" name="sound" onclick="enableSound()"/></div>
+                <button onclick="increaseVolume()">Vol+ </button>
+                <button onclick="decreaseVolume()">Vol- </button>
+            </div>
+        </aside>
+	</div>
+
+	<script src="scripts/background.js"></script>
+	<script src="scripts/roadRunner.js"></script>
+    <script src="scripts/coyote.js"></script>
+    <script src="scripts/bullet.js"></script>
+	<script src="scripts/spike.js"></script>
+	<script src="scripts/player.js"></script>
+	<script src="scripts/enemy.js"></script>
+	<script src="scripts/fallingBonus.js"></script>
+	<script src="scripts/fallingPresent.js"></script>
+	<script src="scripts/main.js"></script>
+	<script src="scripts/controls.js"></script>
+</body>
+</html>
